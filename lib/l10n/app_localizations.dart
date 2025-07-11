@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
 import 'app_localizations_hi.dart';
+import 'app_localizations_ml.dart';
 
 // ignore_for_file: type=lint
 
@@ -96,6 +97,7 @@ abstract class AppLocalizations {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('hi'),
+    Locale('ml'),
   ];
 
   /// No description provided for @title.
@@ -127,6 +129,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'GET STARTED'**
   String get getStarted;
+
+  /// No description provided for @hiThere.
+  ///
+  /// In en, this message translates to:
+  /// **'HI There'**
+  String get hiThere;
+
+  /// No description provided for @welcomeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Aakrikada !'**
+  String get welcomeMessage;
+
+  /// No description provided for @phoneNbr.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get phoneNbr;
+
+  /// No description provided for @enterPhnNbr.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your Phone Number'**
+  String get enterPhnNbr;
+
+  /// No description provided for @continueTo.
+  ///
+  /// In en, this message translates to:
+  /// **'CONTINUE'**
+  String get continueTo;
+
+  /// No description provided for @phnNbrError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid mobile number'**
+  String get phnNbrError;
 }
 
 class _AppLocalizationsDelegate
@@ -140,7 +178,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en', 'hi'].contains(locale.languageCode);
+      <String>['en', 'hi', 'ml'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -153,6 +191,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsEn();
     case 'hi':
       return AppLocalizationsHi();
+    case 'ml':
+      return AppLocalizationsMl();
   }
 
   throw FlutterError(

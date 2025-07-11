@@ -22,4 +22,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get getStarted => 'शुरू हो जाओ';
+
+  @override
+  String get hiThere => 'नमस्ते';
+
+  @override
+  String get welcomeMessage => 'आक्रिडा में आपका स्वागत है!';
+
+  @override
+  String get phoneNbr => 'Phone number';
+
+  @override
+  String get enterPhnNbr => 'अपना फोन नंबर डालें';
+
+  @override
+  String get continueTo => 'जारी रखना';
+
+  @override
+  String get phnNbrError => 'एक मान्य मोबाइल नंबर दर्ज करें';
 }

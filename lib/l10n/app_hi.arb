@@ -3,5 +3,11 @@
     "slogan": "एक बेहतर ग्रह के लिए रीसायकल करें",
     "selectLang": "भाषा चुने",
     "poweredBy": "Powered by KSMA",
-    "getStarted":"शुरू हो जाओ"
+    "getStarted":"शुरू हो जाओ",
+    "hiThere":"नमस्ते",
+    "welcomeMessage":"आक्रिडा में आपका स्वागत है!",
+    "phoneNbr":"Phone number",
+    "enterPhnNbr":"अपना फोन नंबर डालें",
+    "continueTo":"जारी रखना",
+    "phnNbrError":"एक मान्य मोबाइल नंबर दर्ज करें"
 }

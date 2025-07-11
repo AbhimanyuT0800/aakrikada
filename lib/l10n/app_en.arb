@@ -3,5 +3,11 @@
     "slogan": "RECYCLE FOR A BETTER PLANET",
     "selectLang": "Select language",
     "poweredBy": "Powered by KSMA",
-    "getStarted":"GET STARTED"
+    "getStarted":"GET STARTED",
+    "hiThere":"HI There",
+    "welcomeMessage":"Welcome to Aakrikada !",
+    "phoneNbr":"Phone number",
+    "enterPhnNbr":"Enter your Phone Number",
+    "continueTo":"CONTINUE",
+    "phnNbrError":"Enter a valid mobile number"
 }

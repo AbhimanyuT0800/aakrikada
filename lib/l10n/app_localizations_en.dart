@@ -22,4 +22,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get getStarted => 'GET STARTED';
+
+  @override
+  String get hiThere => 'HI There';
+
+  @override
+  String get welcomeMessage => 'Welcome to Aakrikada !';
+
+  @override
+  String get phoneNbr => 'Phone number';
+
+  @override
+  String get enterPhnNbr => 'Enter your Phone Number';
+
+  @override
+  String get continueTo => 'CONTINUE';
+
+  @override
+  String get phnNbrError => 'Enter a valid mobile number';
 }
