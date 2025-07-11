@@ -1,4 +1,7 @@
-
 {
-    "hei": "हेलो!"
+    "title": "आकरी कड़ा",
+    "slogan": "एक बेहतर ग्रह के लिए रीसायकल करें",
+    "selectLang": "भाषा चुने",
+    "poweredBy": "Powered by KSMA",
+    "getStarted":"शुरू हो जाओ"
 }

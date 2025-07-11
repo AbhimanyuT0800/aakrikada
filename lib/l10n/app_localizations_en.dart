@@ -9,5 +9,17 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get hei => 'Hei There';
+  String get title => 'AAKRI KADA';
+
+  @override
+  String get slogan => 'RECYCLE FOR A BETTER PLANET';
+
+  @override
+  String get selectLang => 'Select language';
+
+  @override
+  String get poweredBy => 'Powered by KSMA';
+
+  @override
+  String get getStarted => 'GET STARTED';
 }

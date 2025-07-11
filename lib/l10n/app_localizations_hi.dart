@@ -9,5 +9,17 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
-  String get hei => 'हेलो!';
+  String get title => 'आकरी कड़ा';
+
+  @override
+  String get slogan => 'एक बेहतर ग्रह के लिए रीसायकल करें';
+
+  @override
+  String get selectLang => 'भाषा चुने';
+
+  @override
+  String get poweredBy => 'Powered by KSMA';
+
+  @override
+  String get getStarted => 'शुरू हो जाओ';
 }

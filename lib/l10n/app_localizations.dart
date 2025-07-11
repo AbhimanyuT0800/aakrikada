@@ -98,11 +98,35 @@ abstract class AppLocalizations {
     Locale('hi'),
   ];
 
-  /// No description provided for @hei.
+  /// No description provided for @title.
   ///
   /// In en, this message translates to:
-  /// **'Hei There'**
-  String get hei;
+  /// **'AAKRI KADA'**
+  String get title;
+
+  /// No description provided for @slogan.
+  ///
+  /// In en, this message translates to:
+  /// **'RECYCLE FOR A BETTER PLANET'**
+  String get slogan;
+
+  /// No description provided for @selectLang.
+  ///
+  /// In en, this message translates to:
+  /// **'Select language'**
+  String get selectLang;
+
+  /// No description provided for @poweredBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Powered by KSMA'**
+  String get poweredBy;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'GET STARTED'**
+  String get getStarted;
 }
 
 class _AppLocalizationsDelegate
