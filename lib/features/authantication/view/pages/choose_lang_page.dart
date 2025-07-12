@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/constatnts/asset_files.dart';
+import 'package:aakrikada/core/utils/show_app_snakbar.dart';
 import 'package:aakrikada/features/authantication/controller/language_provider.dart';
 import 'package:aakrikada/features/authantication/view/pages/phone_input_page.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
@@ -104,7 +103,6 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
                       // slected language changes when selected
                       setState(() {
                         selectedLanguage = value;
-                        log(value ?? 'null');
                       });
 
                       // then change shared pref by selected lang
@@ -124,10 +122,14 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
               SizedBox(height: 16),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PhoneInputPage()),
-                  );
+                  if (selectedLanguage == null) {
+                    showAppSnakBar('Select language to continue');
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PhoneInputPage()),
+                    );
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(

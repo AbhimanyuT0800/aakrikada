@@ -40,4 +40,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phnNbrError => 'Enter a valid mobile number';
+
+  @override
+  String get verifyOtp => 'Verify OTP';
+
+  @override
+  String get resendOtp => 'Resend';
+
+  @override
+  String get verify => 'Verify';
 }

@@ -1,7 +1,7 @@
-import 'dart:developer';
-
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
+import 'package:aakrikada/features/authantication/view/pages/otp_verification_page.dart';
+import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -77,52 +77,27 @@ class PhoneInputPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             Spacer(),
+
             // Continue Button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // TODO:
+            AuthCommonButton(
+              tittle: lang.continueTo,
+              onpressed: () {
+                final phone = phoneController.text.trim();
 
-                    final phone = phoneController.text.trim();
-
-                    if (phone.isEmpty ||
-                        phone.length != 10 ||
-                        !RegExp(r'^[6-9]\d{9}$').hasMatch(phone)) {
-                      showAppSnakBar(lang.phnNbrError);
-                    } else {
-                      // Phone number is valid → navigate to next page
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const NextPage(), // Replace with your page
-                      //   ),
-                      // );
-
-                      log('naviaget');
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green[700],
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
+                if (phone.isEmpty ||
+                    phone.length != 10 ||
+                    !RegExp(r'^[6-9]\d{9}$').hasMatch(phone)) {
+                  showAppSnakBar(lang.phnNbrError);
+                } else {
+                  // Phone number is valid → navigate to next page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OtpVerificationPage(),
                     ),
-                    elevation: 4,
-                  ),
-                  child: Text(
-                    lang.continueTo,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      letterSpacing: 1,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+                  );
+                }
+              },
             ),
           ],
         ),

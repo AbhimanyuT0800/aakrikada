@@ -9,5 +9,8 @@
     "phoneNbr":"Phone number",
     "enterPhnNbr":"Enter your Phone Number",
     "continueTo":"CONTINUE",
-    "phnNbrError":"Enter a valid mobile number"
+    "phnNbrError":"Enter a valid mobile number",
+    "verifyOtp":"Verify OTP",
+    "resendOtp":"Resend",
+    "verify":"Verify"
 }

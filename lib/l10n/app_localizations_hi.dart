@@ -40,4 +40,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get phnNbrError => 'एक मान्य मोबाइल नंबर दर्ज करें';
+
+  @override
+  String get verifyOtp => 'ओटीपी सत्यापित करें';
+
+  @override
+  String get resendOtp => 'पुनः भेजें';
+
+  @override
+  String get verify => 'सत्यापित करें';
 }

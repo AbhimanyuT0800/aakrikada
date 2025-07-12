@@ -165,6 +165,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a valid mobile number'**
   String get phnNbrError;
+
+  /// No description provided for @verifyOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify OTP'**
+  String get verifyOtp;
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resendOtp;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
 }
 
 class _AppLocalizationsDelegate

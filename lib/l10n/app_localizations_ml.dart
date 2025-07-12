@@ -40,4 +40,13 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get phnNbrError => 'ശരിയായ മൊബൈൽ നമ്പർ നൽകുക';
+
+  @override
+  String get verifyOtp => 'ഒടിപി സ്ഥിരീകരിക്കുക';
+
+  @override
+  String get resendOtp => 'വീണ്ടും അയയ്‌ക്കുക';
+
+  @override
+  String get verify => 'സ്ഥിരീകരിക്കുക';
 }
