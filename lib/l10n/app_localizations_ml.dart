@@ -49,4 +49,34 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get verify => 'സ്ഥിരീകരിക്കുക';
+
+  @override
+  String get hi => 'ഹായ്';
+
+  @override
+  String get categories => 'ഞങ്ങളുടെ വിഭാഗങ്ങൾ';
+
+  @override
+  String get viewAll => 'എല്ലാം കാണുക';
+
+  @override
+  String get iron => ' ഇരുമ്പ്';
+
+  @override
+  String get newsPaper => 'വാര്ത്താപത്രം';
+
+  @override
+  String get electrolic => 'ഇലക്ട്രോണിക്';
+
+  @override
+  String get plastic => 'പ്ലാസ്റ്റിക്';
+
+  @override
+  String get others => 'മറ്റുള്ളവ';
+
+  @override
+  String get myProducts => 'എന്റെ ഉൽപ്പന്നങ്ങൾ';
+
+  @override
+  String get profile => 'പ്രൊഫൈൽ';
 }

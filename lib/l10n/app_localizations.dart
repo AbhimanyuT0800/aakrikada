@@ -183,6 +183,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Verify'**
   String get verify;
+
+  /// No description provided for @hi.
+  ///
+  /// In en, this message translates to:
+  /// **'HI'**
+  String get hi;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Our categories'**
+  String get categories;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View all'**
+  String get viewAll;
+
+  /// No description provided for @iron.
+  ///
+  /// In en, this message translates to:
+  /// **'Iron'**
+  String get iron;
+
+  /// No description provided for @newsPaper.
+  ///
+  /// In en, this message translates to:
+  /// **'News Paper'**
+  String get newsPaper;
+
+  /// No description provided for @electrolic.
+  ///
+  /// In en, this message translates to:
+  /// **'Electronic'**
+  String get electrolic;
+
+  /// No description provided for @plastic.
+  ///
+  /// In en, this message translates to:
+  /// **'Plastic'**
+  String get plastic;
+
+  /// No description provided for @others.
+  ///
+  /// In en, this message translates to:
+  /// **'Others'**
+  String get others;
+
+  /// No description provided for @myProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'My Products'**
+  String get myProducts;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
 }
 
 class _AppLocalizationsDelegate

@@ -11,6 +11,16 @@
     "continueTo":"जारी रखना",
     "phnNbrError":"एक मान्य मोबाइल नंबर दर्ज करें",
     "verifyOtp": "ओटीपी सत्यापित करें",
-"resendOtp": "पुनः भेजें",
-"verify": "सत्यापित करें"
+    "resendOtp": "पुनः भेजें",
+    "verify": "सत्यापित करें",
+    "hi": "नमस्ते",
+    "categories": "हमारी श्रेणियाँ",
+    "viewAll": "सभी देखें",
+    "iron": "लोहा",
+    "newsPaper": "अख़बार",
+    "electrolic": "इलेक्ट्रॉनिक",
+    "plastic": "प्लास्टिक",
+    "others": "अन्य",
+    "myProducts": "मेरे उत्पाद",
+    "profile": "प्रोफ़ाइल"
 }

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
-import 'package:aakrikada/features/ads/view/pages/home_page.dart';
+import 'package:aakrikada/features/ads/view/pages/my_bottom_navigation_widget.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +79,9 @@ class OtpVerificationPage extends StatelessWidget {
 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(
+                    builder: (context) => MyBottomNavigationWidget(),
+                  ),
                 );
               },
             ),

@@ -49,4 +49,34 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get verify => 'सत्यापित करें';
+
+  @override
+  String get hi => 'नमस्ते';
+
+  @override
+  String get categories => 'हमारी श्रेणियाँ';
+
+  @override
+  String get viewAll => 'सभी देखें';
+
+  @override
+  String get iron => 'लोहा';
+
+  @override
+  String get newsPaper => 'अख़बार';
+
+  @override
+  String get electrolic => 'इलेक्ट्रॉनिक';
+
+  @override
+  String get plastic => 'प्लास्टिक';
+
+  @override
+  String get others => 'अन्य';
+
+  @override
+  String get myProducts => 'मेरे उत्पाद';
+
+  @override
+  String get profile => 'प्रोफ़ाइल';
 }

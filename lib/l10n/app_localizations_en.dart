@@ -49,4 +49,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get verify => 'Verify';
+
+  @override
+  String get hi => 'HI';
+
+  @override
+  String get categories => 'Our categories';
+
+  @override
+  String get viewAll => 'View all';
+
+  @override
+  String get iron => 'Iron';
+
+  @override
+  String get newsPaper => 'News Paper';
+
+  @override
+  String get electrolic => 'Electronic';
+
+  @override
+  String get plastic => 'Plastic';
+
+  @override
+  String get others => 'Others';
+
+  @override
+  String get myProducts => 'My Products';
+
+  @override
+  String get profile => 'Profile';
 }
