@@ -243,6 +243,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @myAc.
+  ///
+  /// In en, this message translates to:
+  /// **'My Account'**
+  String get myAc;
+
+  /// No description provided for @myProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'My Profile'**
+  String get myProfile;
+
+  /// No description provided for @myAdress.
+  ///
+  /// In en, this message translates to:
+  /// **'My Address'**
+  String get myAdress;
+
+  /// No description provided for @logOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logOut;
+
+  /// No description provided for @myOders.
+  ///
+  /// In en, this message translates to:
+  /// **'My Orders'**
+  String get myOders;
+
+  /// No description provided for @accepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted'**
+  String get accepted;
+
+  /// No description provided for @created.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get created;
 }
 
 class _AppLocalizationsDelegate

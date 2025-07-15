@@ -15,27 +15,24 @@ class HomePage extends StatelessWidget {
       length: 5,
       child: Scaffold(
         backgroundColor: Colorpallets.whiteColor,
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header Container with everything inside
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 16,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Container with everything inside
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(18),
+                  bottomRight: Radius.circular(18),
                 ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(18),
-                    bottomRight: Radius.circular(18),
-                  ),
-                  gradient: LinearGradient(
-                    colors: [Color(0xFFDCFFF1), Color(0xFFCEF0FC)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                gradient: LinearGradient(
+                  colors: [Color(0xFFDCFFF1), Color(0xFFCEF0FC)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
+              ),
+              child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
@@ -85,67 +82,64 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
 
-              // TabBar
-              Container(
-                color: Colorpallets.whiteColor,
+            // TabBar
+            Container(
+              color: Colorpallets.whiteColor,
+              padding: EdgeInsets.zero,
+              child: TabBar(
+                isScrollable: true,
+                labelColor: Colorpallets.whiteColor,
+                unselectedLabelColor: Colorpallets.greyColor,
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+                unselectedLabelStyle: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
+                ),
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  color: Colorpallets.seconday,
+                ),
+                indicatorPadding: EdgeInsets.symmetric(
+                  horizontal: -12,
+                  vertical: 6,
+                ),
+                dividerColor: Colors.transparent,
                 padding: EdgeInsets.zero,
-                child: TabBar(
-                  isScrollable: true,
-                  labelColor: Colorpallets.whiteColor,
-                  unselectedLabelColor: Colorpallets.greyColor,
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  unselectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
-                  indicator: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                    color: Colorpallets.seconday,
-                  ),
-                  indicatorPadding: EdgeInsets.symmetric(
-                    horizontal: -12,
-                    vertical: 6,
-                  ),
-                  dividerColor: Colors.transparent,
-                  padding: EdgeInsets.zero,
-                  labelPadding: EdgeInsets.symmetric(horizontal: 16),
-                  tabs: [
-                    Tab(text: lang.iron),
-                    Tab(text: lang.newsPaper),
-                    Tab(text: lang.electrolic),
-                    Tab(text: lang.plastic),
-                    Tab(text: lang.others),
-                  ],
-                ),
+                labelPadding: EdgeInsets.symmetric(horizontal: 16),
+                tabs: [
+                  Tab(text: lang.iron),
+                  Tab(text: lang.newsPaper),
+                  Tab(text: lang.electrolic),
+                  Tab(text: lang.plastic),
+                  Tab(text: lang.others),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: Text(
-                  'Latest Listing',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(
+                'Latest Listing',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
               ),
-              // TabBarView
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    ListedItemWidget(),
-                    Center(child: Text('Content 2')),
-                    Center(child: Text('Content 3')),
-                    Center(child: Text('Content 4')),
-                    Center(child: Text('Content 5')),
-                  ],
-                ),
+            ),
+            // TabBarView
+            Expanded(
+              child: TabBarView(
+                children: [
+                  ListedItemWidget(),
+                  Center(child: Text('Content 2')),
+                  Center(child: Text('Content 3')),
+                  Center(child: Text('Content 4')),
+                  Center(child: Text('Content 5')),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},

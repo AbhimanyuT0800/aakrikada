@@ -79,4 +79,25 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get profile => 'प्रोफ़ाइल';
+
+  @override
+  String get myAc => 'मेरा खाता';
+
+  @override
+  String get myProfile => 'मेरी प्रोफ़ाइल';
+
+  @override
+  String get myAdress => 'मेरा पता';
+
+  @override
+  String get logOut => 'लॉग आउट';
+
+  @override
+  String get myOders => 'मेरे ऑर्डर';
+
+  @override
+  String get accepted => 'स्वीकृत';
+
+  @override
+  String get created => 'बनाया गया';
 }

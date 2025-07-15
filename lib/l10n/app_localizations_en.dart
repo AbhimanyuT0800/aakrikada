@@ -79,4 +79,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get myAc => 'My Account';
+
+  @override
+  String get myProfile => 'My Profile';
+
+  @override
+  String get myAdress => 'My Address';
+
+  @override
+  String get logOut => 'Logout';
+
+  @override
+  String get myOders => 'My Orders';
+
+  @override
+  String get accepted => 'Accepted';
+
+  @override
+  String get created => 'Created';
 }

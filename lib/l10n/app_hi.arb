@@ -22,5 +22,13 @@
     "plastic": "प्लास्टिक",
     "others": "अन्य",
     "myProducts": "मेरे उत्पाद",
-    "profile": "प्रोफ़ाइल"
+    "profile": "प्रोफ़ाइल",
+    "myAc": "मेरा खाता",
+    "myProfile": "मेरी प्रोफ़ाइल",
+    "myAdress": "मेरा पता",
+    "logOut": "लॉग आउट",
+    "myOders": "मेरे ऑर्डर",
+    "accepted": "स्वीकृत",
+    "created": "बनाया गया"
+
 }

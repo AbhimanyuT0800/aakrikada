@@ -79,4 +79,25 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get profile => 'പ്രൊഫൈൽ';
+
+  @override
+  String get myAc => 'എന്റെ അക്കൗണ്ട്';
+
+  @override
+  String get myProfile => 'എന്റെ പ്രൊഫൈൽ';
+
+  @override
+  String get myAdress => 'എന്റെ വിലാസം';
+
+  @override
+  String get logOut => 'ലോഗൗട്ട്';
+
+  @override
+  String get myOders => 'എന്റെ ഓർഡറുകൾ';
+
+  @override
+  String get accepted => 'സ്വീകരിച്ചു';
+
+  @override
+  String get created => 'ഉണ്ടാക്കി';
 }
