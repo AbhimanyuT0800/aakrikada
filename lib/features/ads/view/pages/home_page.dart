@@ -1,4 +1,5 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/ads/view/pages/create_ads_page.dart';
 import 'package:aakrikada/features/ads/view/widgets/listed_item_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class HomePage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // user welcome
                         Text(
                           "${lang.hi}, User",
                           style: TextStyle(
@@ -48,6 +50,7 @@ class HomePage extends StatelessWidget {
                             color: Colorpallets.primary,
                           ),
                         ),
+                        // user profile image
                         SizedBox(
                           width: 48,
                           height: 48,
@@ -60,9 +63,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ), // space between avatar and categories
+                    const SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -123,7 +124,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
-                'Latest Listing',
+                lang.latestList,
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
               ),
             ),
@@ -141,10 +142,17 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
+
+        // create btn
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreateAdPage()),
+            );
+          },
           label: Text(
-            'CREATE AN AD +',
+            '${lang.createAd} +',
             style: TextStyle(color: Colorpallets.whiteColor),
           ),
           backgroundColor: Colorpallets.pinkColor,

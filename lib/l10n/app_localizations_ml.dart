@@ -100,4 +100,58 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get created => 'ഉണ്ടാക്കി';
+
+  @override
+  String get createAd => 'ഒരു പരസ്യം സൃഷ്ടിക്കുക';
+
+  @override
+  String get latestList => 'പുതിയ ലിസ്റ്റിംഗ്';
+
+  @override
+  String get selectCategory => 'വിഭാഗം തിരഞ്ഞെടുക്കുക';
+
+  @override
+  String get summary => 'സാരാംശം';
+
+  @override
+  String get briefSummary => 'നിങ്ങളുടെ ഇനങ്ങളുടെ സംക്ഷിപ്ത വിവരണം';
+
+  @override
+  String get approxNbr => 'അന്ദಾಜ് ഇനങ്ങളുടെ എണ്ണം';
+
+  @override
+  String get priority => 'പ്രാധാന്യം';
+
+  @override
+  String get userInfo => 'ഉപയോക്തൃ വിവരങ്ങൾ';
+
+  @override
+  String get chooseAdress => 'വിലാസം തിരഞ്ഞെടുക്കുക';
+
+  @override
+  String get preferrrdPickup => 'ഐച്ഛിക പിക്കപ്പ് സമയം';
+
+  @override
+  String get high => 'ഉയർന്നത്';
+
+  @override
+  String get medium => 'മധ്യത്തിലുള്ളത്';
+
+  @override
+  String get low => 'കുറഞ്ഞത്';
+
+  @override
+  String get create => 'സൃഷ്ടിക്കുക';
+
+  @override
+  String get orderDetails => 'ഓർഡർ വിശദാംശങ്ങൾ';
+
+  @override
+  String get quotes => 'ഉദ്ധരണികൾ';
+
+  @override
+  String get selected => 'തിരഞ്ഞെടുത്തു';
+
+  @override
+  String get accept => 'സ്വീകരിക്കുക';
 }

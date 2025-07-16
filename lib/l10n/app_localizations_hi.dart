@@ -100,4 +100,58 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get created => 'बनाया गया';
+
+  @override
+  String get createAd => 'एक विज्ञापन बनाएँ';
+
+  @override
+  String get latestList => 'नवीनतम सूची';
+
+  @override
+  String get selectCategory => 'श्रेणी चुनें';
+
+  @override
+  String get summary => 'सारांश';
+
+  @override
+  String get briefSummary => 'अपने आइटम्स का संक्षिप्त विवरण';
+
+  @override
+  String get approxNbr => 'आइटम्स की अनुमानित संख्या';
+
+  @override
+  String get priority => 'प्राथमिकता';
+
+  @override
+  String get userInfo => 'उपयोगकर्ता जानकारी';
+
+  @override
+  String get chooseAdress => 'पता चुनें';
+
+  @override
+  String get preferrrdPickup => 'पसंदीदा पिकअप समय';
+
+  @override
+  String get high => 'उच्च';
+
+  @override
+  String get medium => 'मध्यम';
+
+  @override
+  String get low => 'निम्न';
+
+  @override
+  String get create => 'बनाएं';
+
+  @override
+  String get orderDetails => 'ऑर्डर विवरण';
+
+  @override
+  String get quotes => 'उद्धरण';
+
+  @override
+  String get selected => 'चुना गया';
+
+  @override
+  String get accept => 'स्वीकार करें';
 }

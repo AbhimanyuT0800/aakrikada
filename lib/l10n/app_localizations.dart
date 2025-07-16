@@ -285,6 +285,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Created'**
   String get created;
+
+  /// No description provided for @createAd.
+  ///
+  /// In en, this message translates to:
+  /// **'CREATE AN AD '**
+  String get createAd;
+
+  /// No description provided for @latestList.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest Listing'**
+  String get latestList;
+
+  /// No description provided for @selectCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Category'**
+  String get selectCategory;
+
+  /// No description provided for @summary.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get summary;
+
+  /// No description provided for @briefSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Brief summary of your items'**
+  String get briefSummary;
+
+  /// No description provided for @approxNbr.
+  ///
+  /// In en, this message translates to:
+  /// **'Approx. no. of Items'**
+  String get approxNbr;
+
+  /// No description provided for @priority.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get priority;
+
+  /// No description provided for @userInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'User Information'**
+  String get userInfo;
+
+  /// No description provided for @chooseAdress.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Address'**
+  String get chooseAdress;
+
+  /// No description provided for @preferrrdPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred pickup time'**
+  String get preferrrdPickup;
+
+  /// No description provided for @high.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get high;
+
+  /// No description provided for @medium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get medium;
+
+  /// No description provided for @low.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get low;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'CREATE'**
+  String get create;
+
+  /// No description provided for @orderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get orderDetails;
+
+  /// No description provided for @quotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Quotes'**
+  String get quotes;
+
+  /// No description provided for @selected.
+  ///
+  /// In en, this message translates to:
+  /// **'SELECTED'**
+  String get selected;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
 }
 
 class _AppLocalizationsDelegate

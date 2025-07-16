@@ -100,4 +100,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get created => 'Created';
+
+  @override
+  String get createAd => 'CREATE AN AD ';
+
+  @override
+  String get latestList => 'Latest Listing';
+
+  @override
+  String get selectCategory => 'Select Category';
+
+  @override
+  String get summary => 'Summary';
+
+  @override
+  String get briefSummary => 'Brief summary of your items';
+
+  @override
+  String get approxNbr => 'Approx. no. of Items';
+
+  @override
+  String get priority => 'Priority';
+
+  @override
+  String get userInfo => 'User Information';
+
+  @override
+  String get chooseAdress => 'Choose Address';
+
+  @override
+  String get preferrrdPickup => 'Preferred pickup time';
+
+  @override
+  String get high => 'High';
+
+  @override
+  String get medium => 'Medium';
+
+  @override
+  String get low => 'Low';
+
+  @override
+  String get create => 'CREATE';
+
+  @override
+  String get orderDetails => 'Order Details';
+
+  @override
+  String get quotes => 'Quotes';
+
+  @override
+  String get selected => 'SELECTED';
+
+  @override
+  String get accept => 'Accept';
 }

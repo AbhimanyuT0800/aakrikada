@@ -29,6 +29,25 @@
     "logOut":"Logout",
     "myOders":"My Orders",
     "accepted":"Accepted",
-    "created":"Created"
+    "created":"Created",
+    "createAd":"CREATE AN AD ",
+    "latestList":"Latest Listing",
+    "selectCategory": "Select Category",
+    "summary": "Summary",
+    "briefSummary": "Brief summary of your items",
+    "approxNbr": "Approx. no. of Items",
+    "priority": "Priority",
+    "userInfo": "User Information",
+    "chooseAdress": "Choose Address",
+    "preferrrdPickup": "Preferred pickup time",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "create": "CREATE",
+     "orderDetails": "Order Details",
+    "quotes": "Quotes",
+    "selected": "SELECTED",
+    "accept": "Accept"
+
     
 }

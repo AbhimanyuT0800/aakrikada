@@ -29,6 +29,25 @@
     "logOut": "लॉग आउट",
     "myOders": "मेरे ऑर्डर",
     "accepted": "स्वीकृत",
-    "created": "बनाया गया"
+    "created": "बनाया गया",
+    "createAd": "एक विज्ञापन बनाएँ",
+    "latestList": "नवीनतम सूची",
+    "selectCategory": "श्रेणी चुनें",
+    "summary": "सारांश",
+    "briefSummary": "अपने आइटम्स का संक्षिप्त विवरण",
+    "approxNbr": "आइटम्स की अनुमानित संख्या",
+    "priority": "प्राथमिकता",
+    "userInfo": "उपयोगकर्ता जानकारी",
+    "chooseAdress": "पता चुनें",
+    "preferrrdPickup": "पसंदीदा पिकअप समय",
+    "high": "उच्च",
+    "medium": "मध्यम",
+    "low": "निम्न",
+    "create": "बनाएं",
+    "orderDetails": "ऑर्डर विवरण",
+    "quotes": "उद्धरण",
+    "selected": "चुना गया",
+    "accept": "स्वीकार करें"
+
 
 }
