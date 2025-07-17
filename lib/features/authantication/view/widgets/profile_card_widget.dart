@@ -8,37 +8,42 @@ class ProfileCardWidget extends StatelessWidget {
     required this.icon,
     required this.title,
     this.isLogout = false,
+    required this.onTap,
   });
 
   final Color icBgColor;
   final Icon icon;
   final String title;
   final bool isLogout;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 16),
-      child: Card(
-        color: Colorpallets.whiteColor,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-          child: Row(
-            children: [
-              Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: icBgColor,
+      child: InkWell(
+        onTap: onTap,
+        child: Card(
+          color: Colorpallets.whiteColor,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            child: Row(
+              children: [
+                Container(
+                  width: 42,
+                  height: 42,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: icBgColor,
+                  ),
+                  child: icon,
                 ),
-                child: icon,
-              ),
-              SizedBox(width: 18),
-              Text(title, style: TextStyle(fontSize: 16)),
-              Spacer(),
-              isLogout ? SizedBox() : Icon(Icons.arrow_forward_ios_rounded),
-            ],
+                SizedBox(width: 18),
+                Text(title, style: TextStyle(fontSize: 16)),
+                Spacer(),
+                isLogout ? SizedBox() : Icon(Icons.arrow_forward_ios_rounded),
+              ],
+            ),
           ),
         ),
       ),

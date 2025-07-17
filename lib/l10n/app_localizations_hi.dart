@@ -154,4 +154,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get accept => 'स्वीकार करें';
+
+  @override
+  String get update => 'अपडेट करें';
+
+  @override
+  String get addAddress => 'पता जोड़ें';
+
+  @override
+  String get confirm => 'पुष्टि करें!';
+
+  @override
+  String get confirmLogout => 'क्या आप वाकई ऐप से लॉगआउट करना चाहते हैं?';
+
+  @override
+  String get no => 'नहीं';
+
+  @override
+  String get yes => 'हाँ';
 }

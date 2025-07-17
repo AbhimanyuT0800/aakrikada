@@ -1,4 +1,5 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_address_page.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,12 @@ class CreateAdPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(lang.createAd),
+        title: Text(
+          lang.createAd,
+          style: TextStyle(color: Colorpallets.primary),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colorpallets.primary),
           onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: Color(0xFFDFFFEF),
@@ -115,6 +119,11 @@ class CreateAdPage extends StatelessWidget {
               trailing: Icon(Icons.arrow_forward_ios),
               onTap: () {
                 // choose address config
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditMyAddressPage()),
+                );
               },
             ),
             SizedBox(height: 8),

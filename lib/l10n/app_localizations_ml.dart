@@ -154,4 +154,22 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get accept => 'സ്വീകരിക്കുക';
+
+  @override
+  String get update => 'അപ്ഡേറ്റ് ചെയ്യുക';
+
+  @override
+  String get addAddress => 'വിലാസം ചേർക്കുക';
+
+  @override
+  String get confirm => 'സ്ഥിരീകരിക്കുക!';
+
+  @override
+  String get confirmLogout => 'നിങ്ങൾ ആപ്പിൽ നിന്ന് ലോഗൗട്ട് ചെയ്യാൻ ഉറപ്പാണോ?';
+
+  @override
+  String get no => 'ഇല്ല';
+
+  @override
+  String get yes => 'അതെ';
 }

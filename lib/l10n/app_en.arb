@@ -47,7 +47,13 @@
      "orderDetails": "Order Details",
     "quotes": "Quotes",
     "selected": "SELECTED",
-    "accept": "Accept"
+    "accept": "Accept",
+    "update": "UPDATE",
+    "addAddress": "Add Address",
+    "confirm": "Confirm !",
+    "confirmLogout": "Are you sure to logout from the app?",
+    "no": "NO",
+    "yes": "YES"
 
     
 }

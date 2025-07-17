@@ -154,4 +154,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get accept => 'Accept';
+
+  @override
+  String get update => 'UPDATE';
+
+  @override
+  String get addAddress => 'Add Address';
+
+  @override
+  String get confirm => 'Confirm !';
+
+  @override
+  String get confirmLogout => 'Are you sure to logout from the app?';
+
+  @override
+  String get no => 'NO';
+
+  @override
+  String get yes => 'YES';
 }

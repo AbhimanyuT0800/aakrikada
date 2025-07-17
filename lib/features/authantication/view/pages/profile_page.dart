@@ -1,4 +1,8 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_address_page.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_profile_page.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/logout_confirm_alert_box.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/select_language_page.dart';
 import 'package:aakrikada/features/authantication/view/widgets/profile_card_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +79,15 @@ class ProfilePage extends StatelessWidget {
                             color: Colorpallets.blueColor,
                           ),
                           title: lang.myProfile,
+                          onTap: () {
+                            // Nvigate to my profile page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditMyProfilePage(),
+                              ),
+                            );
+                          },
                         ),
                         ProfileCardWidget(
                           icBgColor: Color(0Xffcff6e0),
@@ -83,6 +96,15 @@ class ProfilePage extends StatelessWidget {
                             color: Colorpallets.greenColor,
                           ),
                           title: lang.myAdress,
+                          onTap: () {
+                            // Nvigate to my address page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditMyAddressPage(),
+                              ),
+                            );
+                          },
                         ),
                         ProfileCardWidget(
                           icBgColor: Color(0Xffcaefff),
@@ -91,6 +113,14 @@ class ProfilePage extends StatelessWidget {
                             color: Colorpallets.lightBlueColor,
                           ),
                           title: lang.selectLang,
+                          onTap: () {
+                            // Nvigate to  laguage selection page
+
+                            showLanguageDialog(
+                              context: context,
+                              title: lang.selectLang,
+                            );
+                          },
                         ),
                         ProfileCardWidget(
                           icBgColor: Color(0Xfffee1d1),
@@ -100,6 +130,17 @@ class ProfilePage extends StatelessWidget {
                           ),
                           title: lang.logOut,
                           isLogout: true,
+                          onTap: () {
+                            // Nvigate to logout confirm page
+
+                            showLogoutConfirmationDialog(
+                              context: context,
+
+                              onConfirm: () {
+                                // Logout methosds
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),
