@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/core/utils/show_app_snakbar.dart';
 import 'package:aakrikada/features/ads/view/pages/my_bottom_navigation_widget.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
@@ -16,20 +17,20 @@ class OtpVerificationPage extends StatelessWidget {
     final lang = AppLocalizations.of(context)!;
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Gradient Header
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFDCFFF1), Color(0xFFCEF0FC)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+      body: Column(
+        children: [
+          // Gradient Header
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFFDCFFF1), Color(0xFFCEF0FC)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
+            ),
+            child: SafeArea(
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -42,37 +43,42 @@ class OtpVerificationPage extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
-            SizedBox(
-              child: OtpTextField(
-                keyboardType: TextInputType.number,
-                numberOfFields: 6,
-                borderColor: Colorpallets.primary,
-                fieldWidth: 40,
-                borderRadius: BorderRadius.circular(8),
-                onCodeChanged: (String code) {
-                  //TODO
-                  log(code);
-                },
-              ),
+          ),
+          Spacer(),
+          SizedBox(
+            child: OtpTextField(
+              keyboardType: TextInputType.number,
+              numberOfFields: 6,
+              borderColor: Colorpallets.primary,
+              fieldWidth: 40,
+              borderRadius: BorderRadius.circular(8),
+              onCodeChanged: (String code) {
+                //TODO
+                log(code);
+              },
             ),
-            SizedBox(height: 12),
-            Padding(
-              padding: EdgeInsetsGeometry.symmetric(
-                horizontal: 32,
-                vertical: 6,
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
+          ),
+          SizedBox(height: 12),
+          Padding(
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 32, vertical: 6),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                onPressed: () {
+                  // TODO
+                },
                 child: Text(
                   lang.resendOtp,
                   style: TextStyle(color: Colorpallets.blueColor),
                 ),
               ),
             ),
-            Spacer(flex: 4),
+          ),
+          Spacer(flex: 4),
 
-            AuthCommonButton(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 18),
+            child: AuthCommonButton(
               tittle: lang.verify,
               onpressed: () {
                 // TODO otpverification method and navigation logic
@@ -83,10 +89,12 @@ class OtpVerificationPage extends StatelessWidget {
                     builder: (context) => MyBottomNavigationWidget(),
                   ),
                 );
+
+                showAppSnakBar(lang.loginSuccess, Colorpallets.greenColor);
               },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

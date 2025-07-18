@@ -429,6 +429,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'YES'**
   String get yes;
+
+  /// No description provided for @loginSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Successful'**
+  String get loginSuccess;
 }
 
 class _AppLocalizationsDelegate

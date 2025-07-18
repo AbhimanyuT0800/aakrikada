@@ -45,7 +45,16 @@ class CreateAdPage extends StatelessWidget {
             SizedBox(height: 12),
             Text(lang.selectCategory),
             SizedBox(height: 4),
+
+            // drop down for select category
             DropdownButtonFormField<String>(
+              borderRadius: BorderRadius.circular(8),
+              dropdownColor: Colorpallets.grey50Color,
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: Colorpallets.blackColor,
+              ),
               items: [
                 DropdownMenuItem(value: 'iron', child: Text(lang.iron)),
                 DropdownMenuItem(
@@ -89,6 +98,14 @@ class CreateAdPage extends StatelessWidget {
             Text(lang.priority),
             SizedBox(height: 4),
             DropdownButtonFormField<String>(
+              borderRadius: BorderRadius.circular(8),
+              dropdownColor: Colorpallets.grey50Color,
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: Colorpallets.blackColor,
+              ),
+
               items: [
                 DropdownMenuItem(value: 'high', child: Text(lang.high)),
                 DropdownMenuItem(value: 'medium', child: Text(lang.medium)),

@@ -62,6 +62,13 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
               Consumer(
                 builder: (context, ref, _) {
                   return DropdownButtonFormField<String>(
+                    borderRadius: BorderRadius.circular(8),
+                    dropdownColor: Colorpallets.grey50Color,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Colorpallets.blackColor,
+                    ),
                     hint: Text(lang.selectLang),
 
                     decoration: InputDecoration(
@@ -76,7 +83,7 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
                           color: Colorpallets.whiteColor,
                           width: 2,
                         ),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(08),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16,
@@ -123,7 +130,10 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
               InkWell(
                 onTap: () {
                   if (selectedLanguage == null) {
-                    showAppSnakBar('Select language to continue');
+                    showAppSnakBar(
+                      'Select language to continue',
+                      Colorpallets.blackColor,
+                    );
                   } else {
                     Navigator.push(
                       context,

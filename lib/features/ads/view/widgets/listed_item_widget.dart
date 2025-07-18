@@ -22,6 +22,8 @@ class ItemDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      highlightColor: Colors.transparent,
+
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => OrderDetailsPage()),
@@ -31,7 +33,7 @@ class ItemDetailsCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(8)),
           color: Colorpallets.grey50Color,
         ),
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           children: [

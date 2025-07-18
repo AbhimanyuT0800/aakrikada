@@ -172,4 +172,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get yes => 'हाँ';
+
+  @override
+  String get loginSuccess => 'लॉगिन सफल रहा';
 }

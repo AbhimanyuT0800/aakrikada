@@ -11,6 +11,6 @@ class Colorpallets {
   static Color greyColor = const Color(0xFF9E9E9E);
   static Color lightGreyColor = const Color(0xFFBBBBBB);
   static Color pinkColor = const Color(0xFFF53977);
-  static Color grey50Color = const Color(0xFFFCFCFC);
+  static Color grey50Color = const Color(0xFFF5F4F4);
   static Color redColor = const Color(0xFFF44336);
 }

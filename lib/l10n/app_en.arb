@@ -53,7 +53,7 @@
     "confirm": "Confirm !",
     "confirmLogout": "Are you sure to logout from the app?",
     "no": "NO",
-    "yes": "YES"
-
-    
+    "yes": "YES",
+    "loginSuccess": "Login Successful"
+  
 }

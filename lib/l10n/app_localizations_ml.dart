@@ -172,4 +172,7 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get yes => 'അതെ';
+
+  @override
+  String get loginSuccess => 'ലോഗിൻ വിജയകരമായി നടന്നു';
 }
