@@ -202,6 +202,12 @@ abstract class AppLocalizations {
   /// **'View all'**
   String get viewAll;
 
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
   /// No description provided for @iron.
   ///
   /// In en, this message translates to:

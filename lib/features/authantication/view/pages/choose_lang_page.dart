@@ -129,6 +129,7 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
               SizedBox(height: 16),
               InkWell(
                 onTap: () {
+                  // if no language selected show alert snakbar
                   if (selectedLanguage == null) {
                     showAppSnakBar(
                       'Select language to continue',

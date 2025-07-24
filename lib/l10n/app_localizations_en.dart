@@ -60,6 +60,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewAll => 'View all';
 
   @override
+  String get all => 'All';
+
+  @override
   String get iron => 'Iron';
 
   @override

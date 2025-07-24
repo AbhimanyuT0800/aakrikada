@@ -9,9 +9,10 @@ class MyProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colorpallets.whiteColor,
       body: Container(
-        height: double.infinity,
         width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFFDCFFF1), Color(0xFFCEF0FC)],
@@ -38,7 +39,7 @@ class MyProductsPage extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colorpallets.grey50Color,
+                    color: Colorpallets.whiteColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(24),
                       topRight: Radius.circular(24),

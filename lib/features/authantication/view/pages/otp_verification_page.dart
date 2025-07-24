@@ -59,6 +59,7 @@ class OtpVerificationPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 12),
+          // resent OTP method
           Padding(
             padding: EdgeInsetsGeometry.symmetric(horizontal: 32, vertical: 6),
             child: Align(
@@ -89,7 +90,7 @@ class OtpVerificationPage extends StatelessWidget {
                     builder: (context) => MyBottomNavigationWidget(),
                   ),
                 );
-
+                // show green snak bar after login
                 showAppSnakBar(lang.loginSuccess, Colorpallets.greenColor);
               },
             ),

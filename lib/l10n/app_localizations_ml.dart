@@ -60,6 +60,9 @@ class AppLocalizationsMl extends AppLocalizations {
   String get viewAll => 'എല്ലാം കാണുക';
 
   @override
+  String get all => 'എല്ലാം';
+
+  @override
   String get iron => ' ഇരുമ്പ്';
 
   @override

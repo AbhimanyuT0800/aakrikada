@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     final lang = AppLocalizations.of(context)!;
 
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: Scaffold(
         backgroundColor: Colorpallets.whiteColor,
         body: Column(
@@ -110,9 +110,9 @@ class HomePage extends StatelessWidget {
                   vertical: 6,
                 ),
                 dividerColor: Colors.transparent,
-                padding: EdgeInsets.zero,
-                labelPadding: EdgeInsets.symmetric(horizontal: 16),
+                tabAlignment: TabAlignment.start,
                 tabs: [
+                  Tab(text: lang.all),
                   Tab(text: lang.iron),
                   Tab(text: lang.newsPaper),
                   Tab(text: lang.electrolic),
@@ -122,7 +122,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.only(left: 16, top: 8),
               child: Text(
                 lang.latestList,
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
@@ -133,6 +133,7 @@ class HomePage extends StatelessWidget {
               child: TabBarView(
                 children: [
                   ListedItemWidget(),
+                  Center(child: Text('Content 1')),
                   Center(child: Text('Content 2')),
                   Center(child: Text('Content 3')),
                   Center(child: Text('Content 4')),

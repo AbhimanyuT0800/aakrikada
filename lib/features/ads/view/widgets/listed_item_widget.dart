@@ -68,9 +68,12 @@ class ItemDetailsCard extends StatelessWidget {
             isAccepted != null
                 ? Column(
                     children: [
-                      Text(
-                        isAccepted! ? 'Accepted' : 'Created',
-                        style: TextStyle(fontWeight: FontWeight.w700),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text(
+                          isAccepted! ? 'Accepted' : 'Created',
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        ),
                       ),
                       IconButton(
                         onPressed: () {

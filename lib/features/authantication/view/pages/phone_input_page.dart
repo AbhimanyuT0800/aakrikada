@@ -92,7 +92,7 @@ class PhoneInputPage extends StatelessWidget {
                     !RegExp(r'^[6-9]\d{9}$').hasMatch(phone)) {
                   showAppSnakBar(lang.phnNbrError, Colorpallets.blackColor);
                 } else {
-                  // Phone number is valid → navigate to next page
+                  // Phone number is valid -- navigate to next page
                   Navigator.push(
                     context,
                     MaterialPageRoute(

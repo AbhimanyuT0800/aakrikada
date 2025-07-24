@@ -60,6 +60,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get viewAll => 'सभी देखें';
 
   @override
+  String get all => 'सभी';
+
+  @override
   String get iron => 'लोहा';
 
   @override
