@@ -1,15 +1,16 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
-import 'package:aakrikada/features/authantication/view/pages/otp_verification_page.dart';
+import 'package:aakrikada/features/authantication/controller/api_controller/api_auth_provider.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PhoneInputPage extends StatelessWidget {
+class PhoneInputPage extends ConsumerWidget {
   const PhoneInputPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     //language provider
     final lang = AppLocalizations.of(context)!;
 
@@ -92,13 +93,11 @@ class PhoneInputPage extends StatelessWidget {
                     !RegExp(r'^[6-9]\d{9}$').hasMatch(phone)) {
                   showAppSnakBar(lang.phnNbrError, Colorpallets.blackColor);
                 } else {
-                  // Phone number is valid -- navigate to next page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OtpVerificationPage(),
-                    ),
-                  );
+                  // Phone number is valid -- sent otp logic
+
+                  ref
+                      .watch(apiAuthProvider.notifier)
+                      .verifyUser(phn: phone, context: context);
                 }
               },
             ),

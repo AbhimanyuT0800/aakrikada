@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Ignore generated files
+**/*.g.dart
+**/*.freezed.dart
+
+# Ignore keys
+lib/api_key/api_key.dart

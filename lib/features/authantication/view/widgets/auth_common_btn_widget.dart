@@ -1,6 +1,9 @@
+import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/authantication/controller/api_controller/api_auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AuthCommonButton extends StatelessWidget {
+class AuthCommonButton extends ConsumerWidget {
   const AuthCommonButton({
     super.key,
 
@@ -12,7 +15,7 @@ class AuthCommonButton extends StatelessWidget {
   final Function() onpressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: SizedBox(
@@ -27,15 +30,17 @@ class AuthCommonButton extends StatelessWidget {
             ),
             elevation: 4,
           ),
-          child: Text(
-            tittle,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              letterSpacing: 1,
-              color: Colors.white,
-            ),
-          ),
+          child: ref.watch(apiAuthProvider)
+              ? CircularProgressIndicator(color: Colorpallets.whiteColor)
+              : Text(
+                  tittle,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    letterSpacing: 1,
+                    color: Colors.white,
+                  ),
+                ),
         ),
       ),
     );

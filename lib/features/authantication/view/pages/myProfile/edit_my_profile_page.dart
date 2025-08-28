@@ -3,6 +3,8 @@ import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_w
 import 'package:aakrikada/features/authantication/view/widgets/edit_text_field_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class EditMyProfilePage extends StatelessWidget {
   EditMyProfilePage({super.key});
@@ -63,14 +65,45 @@ class EditMyProfilePage extends StatelessWidget {
                 children: [
                   SizedBox(height: 20),
                   // Profile image
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/img_avathar.jpg'),
-                        fit: BoxFit.cover,
+                  InkWell(
+                    onTap: () async {
+                      if (await Permission.photos.request().isGranted &&
+                          await Permission.storage.request().isGranted &&
+                          await Permission.camera.request().isGranted) {
+                        // Both permissions are granted
+
+                        // final ImagePicker picker = ImagePicker();
+                        // final XFile? image = await picker.pickImage(
+                        //   source: ImageSource.gallery,
+                        // );
+
+                        // if (image != null) {
+                        //   // Use the picked image, e.g., display it or upload it
+                        //   print('Image path: ${image.path}');
+                        // }
+
+                        final ImagePicker picker = ImagePicker();
+                        final XFile? photo = await picker.pickImage(
+                          source: ImageSource.camera,
+                        );
+
+                        if (photo != null) {
+                          // Use the captured photo
+                          print('Photo path: ${photo.path}');
+                        }
+                      } else {
+                        // Handle the case where permissions are not granted
+                      }
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        image: const DecorationImage(
+                          image: AssetImage('assets/images/img_avathar.jpg'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
