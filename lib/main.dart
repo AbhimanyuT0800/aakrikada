@@ -1,5 +1,6 @@
-import 'package:aakrikada/features/authantication/controller/language_provider.dart';
-import 'package:aakrikada/features/authantication/services/lang_shared_pref_service.dart';
+import 'package:aakrikada/features/ads/view/pages/my_bottom_navigation_widget.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
+import 'package:aakrikada/features/authantication/services/shared_pref_service.dart';
 import 'package:aakrikada/features/authantication/view/pages/choose_lang_page.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // initialize shared pref
-  await LangSharedPrefService.initializePref();
+  await SharedPrefService.initializePref();
 
   runApp(ProviderScope(child: const MainApp()));
 }
@@ -33,7 +34,9 @@ class MainApp extends ConsumerWidget {
       locale: Locale(ref.watch(appLanguageProvider)),
       supportedLocales: [Locale('en'), Locale('hi'), Locale('ml')],
       scaffoldMessengerKey: scaffoldMessngerKey,
-      home: ChooseLangPage(),
+      home: ref.watch(storeUserIdProvider) != null
+          ? MyBottomNavigationWidget()
+          : ChooseLangPage(),
     );
   }
 }

@@ -31,7 +31,16 @@ class AuthCommonButton extends ConsumerWidget {
             elevation: 4,
           ),
           child: ref.watch(apiAuthProvider)
-              ? CircularProgressIndicator(color: Colorpallets.whiteColor)
+              ? CircularProgressIndicator(
+                  color: Colorpallets.whiteColor,
+                  strokeWidth: 4,
+                  constraints: BoxConstraints(
+                    maxWidth: 23,
+                    maxHeight: 23,
+                    minHeight: 23,
+                    minWidth: 23,
+                  ),
+                )
               : Text(
                   tittle,
                   style: TextStyle(

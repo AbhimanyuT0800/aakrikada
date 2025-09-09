@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
 import 'package:aakrikada/features/ads/view/pages/my_bottom_navigation_widget.dart';
+import 'package:aakrikada/features/authantication/domain/model/otp_verified_model.dart';
 import 'package:aakrikada/features/authantication/services/api_auth_services.dart';
 import 'package:aakrikada/features/authantication/view/pages/otp_verification_page.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class ApiAuth extends _$ApiAuth {
   }
 
   // verify OTP provider
-  Future<void> verifyOtp({
+  Future<OtpVerifyModel?> verifyOtp({
     required String phn,
     required String otp,
     required BuildContext context,
@@ -69,6 +70,8 @@ class ApiAuth extends _$ApiAuth {
         );
         // login sucess snak bar after navigate to home page
         showAppSnakBar('Login Successful', Colorpallets.greenColor);
+
+        return resp;
       } else {
         showAppSnakBar(
           'Something went wrong... Try again',
@@ -84,6 +87,7 @@ class ApiAuth extends _$ApiAuth {
     } finally {
       state = false;
     }
+    return null;
   }
 
   // resend OTP provider

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/authantication/controller/api_controller/api_auth_provider.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -92,12 +93,19 @@ class OtpVerificationPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 18),
             child: AuthCommonButton(
               tittle: lang.verify,
-              onpressed: () {
+              onpressed: () async {
                 log(otp);
                 // otp verification method and navigation logic
-                ref
+                final data = await ref
                     .watch(apiAuthProvider.notifier)
                     .verifyOtp(phn: phn, otp: otp, context: context);
+
+                // store user id on shared pref
+                if (data != null) {
+                  ref
+                      .read(storeUserIdProvider.notifier)
+                      .addUserId(data.data.id);
+                }
               },
             ),
           ),

@@ -9,6 +9,7 @@ class ApiAuthServices {
   // instance for DIO
   final _dio = Dio(BaseOptions(baseUrl: AppUrls.baseUrl));
 
+  // verify user mobile number
   Future<VerifiedUserModel?> verifyUser({required String phn}) async {
     try {
       Response response = await _dio.post(
@@ -86,7 +87,7 @@ class ApiAuthServices {
     } on DioException catch (e) {
       throw Exception(handleDioError(e));
     } catch (e) {
-      throw Exception("Error: ${e.toString()}");
+      throw Exception(" ${e.toString()}");
     }
   }
 }

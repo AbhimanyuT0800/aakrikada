@@ -1,10 +1,16 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/authantication/domain/model/address_models/get_address_model.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/add_address_page.dart';
+import 'package:aakrikada/features/authantication/view/widgets/address_card_widget.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class EditMyAddressPage extends StatelessWidget {
-  const EditMyAddressPage({super.key});
+  const EditMyAddressPage({super.key, required this.addressModel});
+
+  final GetAddressModel? addressModel;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +60,7 @@ class EditMyAddressPage extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 14, vertical: 16),
                   decoration: BoxDecoration(
-                    color: Colorpallets.grey50Color,
+                    color: Colorpallets.whiteColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(24),
                       topRight: Radius.circular(24),
@@ -62,46 +68,33 @@ class EditMyAddressPage extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(
-                        width: double.infinity,
-                        child: Card(
-                          color: Colorpallets.whiteColor,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 16,
+                      addressModel!.data.isEmpty
+                          ? Center(child: Text('No addess found'))
+                          : ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: addressModel!.data.length,
+                              itemBuilder: (context, index) {
+                                return AddressCardWidget(
+                                  addressData: addressModel!.data[index],
+                                );
+                              },
                             ),
-                            child: Row(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Abhi'),
-                                    Text('Tharavattom kunnu'),
-                                    Text('Pathirippatta'),
-                                    Text('Kozhikode'),
-                                    Text('673507'),
-                                  ],
-                                ),
-                                Spacer(),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.delete_outline_outlined,
-                                    color: Colorpallets.redColor,
-                                    size: 32,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+
                       Spacer(),
                       AuthCommonButton(
-                        tittle: 'add',
+                        tittle: 'Add',
                         onpressed: () {
-                          //
+                          //add new address
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(24),
+                              ),
+                            ),
+                            builder: (context) => const AddAddressBottomSheet(),
+                          );
                         },
                       ),
                     ],

@@ -1,4 +1,6 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_address_page.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_profile_page.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/logout_confirm_alert_box.dart';
@@ -6,12 +8,13 @@ import 'package:aakrikada/features/authantication/view/pages/myProfile/select_la
 import 'package:aakrikada/features/authantication/view/widgets/profile_card_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // language provider
     final lang = AppLocalizations.of(context)!;
 
@@ -96,12 +99,21 @@ class ProfilePage extends StatelessWidget {
                             color: Colorpallets.greenColor,
                           ),
                           title: lang.myAdress,
-                          onTap: () {
+                          onTap: () async {
+                            final addessData = await ref
+                                .watch(apiAddressProvider.notifier)
+                                .getAddress(
+                                  ref
+                                      .read(storeUserIdProvider.notifier)
+                                      .getUserid()!,
+                                );
+
                             // Nvigate to my address page
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EditMyAddressPage(),
+                                builder: (context) =>
+                                    EditMyAddressPage(addressModel: addessData),
                               ),
                             );
                           },

@@ -1,4 +1,6 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/ads/domain/model/categories_model.dart';
+import 'package:aakrikada/features/ads/services/api_ads_services.dart';
 import 'package:aakrikada/features/ads/view/pages/home_page.dart';
 import 'package:aakrikada/features/ads/view/pages/my_products_page.dart';
 import 'package:aakrikada/features/authantication/view/pages/profile_page.dart';
@@ -6,14 +8,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class MyBottomNavigationWidget extends HookWidget {
-  const MyBottomNavigationWidget({super.key});
+  // ignore: prefer_const_constructors_in_immutables
+  MyBottomNavigationWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final pages = [HomePage(), MyProductsPage(), ProfilePage()];
-
-    // index controller for bottom navigation
     final currentIndex = useState(0);
+
+    // ✅ hold API data in a hook state
+    final categoryModel = useState<List<Category>?>(null);
+
+    useEffect(() {
+      Future.microtask(() async {
+        final categoryData = await ApiAdsServices().getAdCategories();
+        categoryModel.value = categoryData.data; // update state
+      });
+      return null;
+    }, []);
+
+    final pages = [
+      HomePage(categoryModel: categoryModel.value),
+      MyProductsPage(),
+      ProfilePage(),
+    ];
 
     return Scaffold(
       body: pages[currentIndex.value],

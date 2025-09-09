@@ -1,5 +1,5 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
-import 'package:aakrikada/features/authantication/controller/language_provider.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

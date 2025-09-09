@@ -1,7 +1,7 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/constatnts/asset_files.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
-import 'package:aakrikada/features/authantication/controller/language_provider.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/view/pages/phone_input_page.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
