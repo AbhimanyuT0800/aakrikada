@@ -5,7 +5,6 @@ import 'package:aakrikada/features/authantication/view/widgets/address_card_widg
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class EditMyAddressPage extends StatelessWidget {
   const EditMyAddressPage({super.key, required this.addressModel});

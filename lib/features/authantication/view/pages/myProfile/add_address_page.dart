@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
 import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
+import 'package:aakrikada/features/authantication/domain/model/address_models/add_address_request_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_areas_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_districts_model.dart';
 import 'package:flutter/material.dart';
@@ -191,12 +193,21 @@ class _AddAddressBottomSheetState extends ConsumerState<AddAddressBottomSheet> {
           AuthCommonButton(
             tittle: "Save Address",
             onpressed: () async {
-              debugPrint(
-                "House: ${adddressController.text}, "
-                "Town: ${townController.text}, "
-                "District ID: $selectedDistrict, "
-                "Area ID: $selectedArea",
-              );
+              await ref
+                  .read(apiAddressProvider.notifier)
+                  .createAnAddress(
+                    model: AddAddressRequestModel(
+                      userId: int.parse(
+                        ref.read(storeUserIdProvider.notifier).getUserid()!,
+                      ),
+                      address: adddressController.text,
+                      area: selectedArea ?? 'vadakara',
+                      town: townController.text,
+                      district: selectedDistrict ?? 'calicut',
+                      lat: '12.9141',
+                      lng: '74.85',
+                    ),
+                  );
 
               // await ref.read(apiAddressProvider.notifier).
               Navigator.pop(context);

@@ -1,5 +1,6 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
+import 'package:aakrikada/features/authantication/domain/model/address_models/add_address_request_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_address_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_areas_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_districts_model.dart';
@@ -52,6 +53,22 @@ class ApiAddress extends _$ApiAddress {
       );
     } finally {
       await getAddress(id);
+      state = false;
+    }
+  }
+
+  // create an address
+  Future<void> createAnAddress({required AddAddressRequestModel model}) async {
+    state = true;
+    try {
+      await ApiAddressServices().addNewAddress(model);
+    } catch (e) {
+      // catch all error throw from api service
+      showAppSnakBar(
+        e.toString().replaceFirst("Exception: ", ""),
+        Colorpallets.redColor,
+      );
+    } finally {
       state = false;
     }
   }

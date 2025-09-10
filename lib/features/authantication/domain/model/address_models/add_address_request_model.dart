@@ -1,4 +1,4 @@
-class AddAddressRequest {
+class AddAddressRequestModel {
   final int userId;
   final String address;
   final String area;
@@ -7,7 +7,7 @@ class AddAddressRequest {
   final String lat;
   final String lng;
 
-  AddAddressRequest({
+  AddAddressRequestModel({
     required this.userId,
     required this.address,
     required this.area,
