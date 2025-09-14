@@ -2,7 +2,8 @@ import 'dart:developer';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
 import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
 import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
-import 'package:aakrikada/features/authantication/domain/model/address_models/add_address_request_model.dart';
+import 'package:aakrikada/features/authantication/domain/model/address_models/address_request_model.dart';
+import 'package:aakrikada/features/authantication/domain/model/address_models/get_address_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_areas_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_districts_model.dart';
 import 'package:flutter/material.dart';
@@ -10,16 +11,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 
-class AddAddressBottomSheet extends ConsumerStatefulWidget {
-  const AddAddressBottomSheet({super.key});
+class UpdateAddressBottomSheet extends ConsumerStatefulWidget {
+  const UpdateAddressBottomSheet({super.key, required this.model});
+
+  final AddressData model;
 
   @override
-  ConsumerState<AddAddressBottomSheet> createState() =>
-      _AddAddressBottomSheetState();
+  ConsumerState<UpdateAddressBottomSheet> createState() =>
+      _UpdateAdddressBottomSheetState();
 }
 
-class _AddAddressBottomSheetState extends ConsumerState<AddAddressBottomSheet> {
-  final TextEditingController adddressController = TextEditingController();
+class _UpdateAdddressBottomSheetState
+    extends ConsumerState<UpdateAddressBottomSheet> {
+  final TextEditingController addressController = TextEditingController();
   final TextEditingController townController = TextEditingController();
 
   String? selectedDistrict;
@@ -35,24 +39,42 @@ class _AddAddressBottomSheetState extends ConsumerState<AddAddressBottomSheet> {
   void initState() {
     super.initState();
     Future.microtask(() async {
+      selectedDistrict = widget.model.district;
+      selectedArea = widget.model.area;
+
+      addressController.text = widget.model.address;
+      townController.text = widget.model.town;
+
       try {
         final districts = await ref
             .read(apiAddressProvider.notifier)
             .getDistrict();
         setState(() {
           allDistricts = districts;
-          isLoadingDistricts = false;
         });
+
+        final result = await ref
+            .read(apiAddressProvider.notifier)
+            .getAreas(district: widget.model.id);
+        if (result != null) {
+          setState(() {
+            allAreas = result;
+          });
+        }
       } catch (e) {
         showAppSnakBar("Failed to load districts", Colorpallets.redColor);
-        setState(() => isLoadingDistricts = false);
+      } finally {
+        setState(() {
+          isLoadingAreas = false;
+          isLoadingDistricts = false;
+        });
       }
     });
   }
 
   @override
   void dispose() {
-    adddressController.dispose();
+    addressController.dispose();
     townController.dispose();
     super.dispose();
   }
@@ -107,7 +129,7 @@ class _AddAddressBottomSheetState extends ConsumerState<AddAddressBottomSheet> {
 
           // House Name
           TextField(
-            controller: adddressController,
+            controller: addressController,
             decoration: InputDecoration(
               labelText: "House Name",
               border: OutlineInputBorder(
@@ -131,7 +153,9 @@ class _AddAddressBottomSheetState extends ConsumerState<AddAddressBottomSheet> {
 
           // District dropdown
           isLoadingDistricts
-              ? const Center(child: CircularProgressIndicator())
+              ? Center(
+                  child: CircularProgressIndicator(color: Colorpallets.primary),
+                )
               : DropdownButtonFormField<String>(
                   value: selectedDistrict,
                   decoration: InputDecoration(
@@ -164,7 +188,9 @@ class _AddAddressBottomSheetState extends ConsumerState<AddAddressBottomSheet> {
 
           // Area dropdown
           isLoadingAreas
-              ? const Center(child: CircularProgressIndicator())
+              ? Center(
+                  child: CircularProgressIndicator(color: Colorpallets.primary),
+                )
               : DropdownButtonFormField<String>(
                   value: selectedArea,
                   decoration: InputDecoration(
@@ -179,38 +205,44 @@ class _AddAddressBottomSheetState extends ConsumerState<AddAddressBottomSheet> {
                             DropdownMenuItem(value: a.id, child: Text(a.area)),
                       )
                       .toList(),
-                  onChanged: allAreas.isNotEmpty
-                      ? (val) {
-                          setState(() {
-                            selectedArea = val;
-                          });
-                        }
-                      : null,
+                  onChanged: (val) {
+                    setState(() {
+                      selectedArea = val;
+                    });
+                  },
                 ),
           const SizedBox(height: 24),
 
           // Save button
           AuthCommonButton(
-            tittle: "Save Address",
+            tittle: "Update Address",
             onpressed: () async {
-              await ref
-                  .read(apiAddressProvider.notifier)
-                  .createAnAddress(
-                    model: AddAddressRequestModel(
-                      userId: int.parse(
-                        ref.read(storeUserIdProvider.notifier).getUserid()!,
+              if (selectedArea != null &&
+                  selectedDistrict != null &&
+                  townController.text.isNotEmpty &&
+                  addressController.text.isNotEmpty) {
+                await ref
+                    .read(apiAddressProvider.notifier)
+                    .updateAnAddress(
+                      model: UpdateAddressModel(
+                        addressId: int.parse(widget.model.id),
+                        userId: int.parse(
+                          ref.read(storeUserIdProvider.notifier).getUserid()!,
+                        ),
+                        address: addressController.text,
+                        area: selectedArea ?? 'vadakara',
+                        town: townController.text,
+                        district: selectedDistrict ?? 'calicut',
+                        lat: '12.9141',
+                        lng: '74.85',
                       ),
-                      address: adddressController.text,
-                      area: selectedArea ?? 'vadakara',
-                      town: townController.text,
-                      district: selectedDistrict ?? 'calicut',
-                      lat: '12.9141',
-                      lng: '74.85',
-                    ),
-                  );
+                    );
 
-              // await ref.read(apiAddressProvider.notifier).
-              Navigator.pop(context);
+                // await ref.read(apiAddressProvider.notifier).
+                Navigator.pop(context);
+              } else {
+                showAppSnakBar('Fill all the fields', Colorpallets.blackColor);
+              }
             },
           ),
         ],

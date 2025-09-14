@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
 import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_address_model.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/update_address_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,6 +28,8 @@ class AddressCardWidget extends ConsumerWidget {
                 ],
               ),
               Spacer(),
+
+              // delete address
               IconButton(
                 onPressed: () async {
                   await ref
@@ -40,13 +41,29 @@ class AddressCardWidget extends ConsumerWidget {
                         addressId: addressData.id,
                       );
                   ref.invalidate(apiAddressProvider);
-                  log(' de');
                 },
                 icon: Icon(
                   Icons.delete_outline_outlined,
                   color: Colorpallets.redColor,
                   size: 32,
                 ),
+              ),
+              // edit address
+              IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(24),
+                      ),
+                    ),
+                    builder: (context) =>
+                        UpdateAddressBottomSheet(model: addressData),
+                  );
+                },
+                icon: Icon(Icons.edit),
               ),
             ],
           ),

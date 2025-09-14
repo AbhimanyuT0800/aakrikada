@@ -1,6 +1,6 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
-import 'package:aakrikada/features/authantication/domain/model/address_models/add_address_request_model.dart';
+import 'package:aakrikada/features/authantication/domain/model/address_models/address_request_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_address_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_areas_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_districts_model.dart';
@@ -73,6 +73,22 @@ class ApiAddress extends _$ApiAddress {
     }
   }
 
+  // update an address
+  Future<void> updateAnAddress({required UpdateAddressModel model}) async {
+    state = true;
+    try {
+      await ApiAddressServices().updateAddress(model);
+    } catch (e) {
+      // catch all error throw from api service
+      showAppSnakBar(
+        e.toString().replaceFirst("Exception: ", ""),
+        Colorpallets.redColor,
+      );
+    } finally {
+      state = false;
+    }
+  }
+
   // getting all districts
   Future<GetDistrictsModel?> getDistrict() async {
     state = true;
@@ -108,4 +124,20 @@ class ApiAddress extends _$ApiAddress {
     }
     return null;
   }
+}
+
+// Getting all user address
+@riverpod
+Future<GetAddressModel?> getAddress(ref, String id) async {
+  try {
+    final data = await ApiAddressServices().getUserAddress(int.parse(id));
+    return data;
+  } catch (e) {
+    // catch all error throw from api service
+    showAppSnakBar(
+      e.toString().replaceFirst("Exception: ", ""),
+      Colorpallets.redColor,
+    );
+  } finally {}
+  return null;
 }

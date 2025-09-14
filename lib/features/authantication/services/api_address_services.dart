@@ -5,7 +5,7 @@ import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/constatnts/app_urls.dart';
 import 'package:aakrikada/core/utils/api_exceptions.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
-import 'package:aakrikada/features/authantication/domain/model/address_models/add_address_request_model.dart';
+import 'package:aakrikada/features/authantication/domain/model/address_models/address_request_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/api_success_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_address_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_areas_model.dart';
@@ -72,7 +72,28 @@ class ApiAddressServices {
 
   // Add a new address
 
-  addNewAddress(AddAddressRequestModel model) async {
+  Future<void> addNewAddress(AddAddressRequestModel model) async {
+    log(model.toJson().toString());
+    try {
+      final Response response = await _dio.post(
+        AppUrls.addNewAdress,
+        data: model.toJson(),
+      );
+      if (response.statusCode == 200) {
+        final data = SuccessModel.fromJson(response.data);
+        showAppSnakBar(data.message, Colorpallets.greenColor);
+      } else {
+        showAppSnakBar('Something went wrong', Colorpallets.redColor);
+      }
+    } on DioException catch (e) {
+      throw Exception(handleDioError(e));
+    } catch (e) {
+      throw Exception("Error: ${e.toString()}");
+    }
+  }
+
+  // Edit address
+  Future<void> updateAddress(UpdateAddressModel model) async {
     log(model.toJson().toString());
     try {
       final Response response = await _dio.post(

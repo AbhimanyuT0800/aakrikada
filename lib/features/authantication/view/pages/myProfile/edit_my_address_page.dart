@@ -1,6 +1,6 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_address_model.dart';
-import 'package:aakrikada/features/authantication/view/pages/myProfile/add_address_page.dart';
+import 'package:aakrikada/features/authantication/view/widgets/add_new_address_page.dart';
 import 'package:aakrikada/features/authantication/view/widgets/address_card_widget.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
@@ -92,7 +92,8 @@ class EditMyAddressPage extends StatelessWidget {
                                 top: Radius.circular(24),
                               ),
                             ),
-                            builder: (context) => const AddAddressBottomSheet(),
+                            builder: (context) =>
+                                const AddNewAddressBottomSheet(),
                           );
                         },
                       ),
