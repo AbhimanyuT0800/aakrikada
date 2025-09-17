@@ -1,23 +1,23 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/ads/domain/model/get_user_ads_model.dart';
 import 'package:aakrikada/features/ads/view/pages/order_details_page.dart';
 import 'package:flutter/material.dart';
 
-class ListedItemWidget extends StatelessWidget {
-  const ListedItemWidget({super.key});
+// class ListedItemWidget extends StatelessWidget {
+//   const ListedItemWidget({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) => ItemDetailsCard(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView.builder(
+//       itemCount: 10,
+//       itemBuilder: (context, index) => ItemDetailsCard(),
+//     );
+//   }
+// }
 
 class ItemDetailsCard extends StatelessWidget {
-  const ItemDetailsCard({super.key, this.isAccepted});
-
-  final bool? isAccepted;
+  const ItemDetailsCard({super.key, required this.adsData});
+  final AdData adsData;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,9 @@ class ItemDetailsCard extends StatelessWidget {
 
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => OrderDetailsPage()),
+        MaterialPageRoute(
+          builder: (context) => OrderDetailsPage(adsData: adsData),
+        ),
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -37,21 +39,18 @@ class ItemDetailsCard extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           children: [
-            SizedBox(
-              width: 88,
-              child: Image.asset('assets/images/img_demo.jpeg'),
-            ),
+            SizedBox(width: 88, child: Image.network(adsData.image)),
             SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Chair',
+                  adsData.categories,
                   style: TextStyle(fontSize: 16, color: Colorpallets.greyColor),
                 ),
                 Text(
-                  'Plastic',
+                  adsData.orderSummary,
                   style: TextStyle(
                     color: Colorpallets.greenColor,
                     fontSize: 18,
@@ -65,34 +64,26 @@ class ItemDetailsCard extends StatelessWidget {
               ],
             ),
             Spacer(),
-            isAccepted != null
-                ? Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Text(
-                          isAccepted! ? 'Accepted' : 'Created',
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          // TODO
-                        },
-                        icon: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colorpallets.greenColor,
-                        ),
-                      ),
-                    ],
-                  )
-                : IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colorpallets.greenColor,
-                    ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Text(
+                    adsData.status,
+                    style: TextStyle(fontWeight: FontWeight.w700),
                   ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    // TODO
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colorpallets.greenColor,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

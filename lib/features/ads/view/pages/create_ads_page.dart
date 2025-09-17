@@ -2,35 +2,75 @@ import 'dart:typed_data';
 
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
+import 'package:aakrikada/features/ads/controller/address_id_provider.dart';
 import 'package:aakrikada/features/ads/controller/api_ads_provider.dart';
 import 'package:aakrikada/features/ads/domain/create_ads_request_model.dart';
 import 'package:aakrikada/features/ads/services/pick_image_services.dart';
-import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
 import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_address_page.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreateAdPage extends ConsumerWidget {
+class CreateAdPage extends ConsumerStatefulWidget {
   const CreateAdPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // language provider
+  ConsumerState<CreateAdPage> createState() => _CreateAdPageState();
+}
+
+class _CreateAdPageState extends ConsumerState<CreateAdPage> {
+  Uint8List? imageData;
+  int? categoryCount;
+  String? priority;
+  DateTime? preferredPickupTime;
+
+  final TextEditingController summaryController = TextEditingController();
+  final TextEditingController itemCountController = TextEditingController();
+
+  @override
+  void dispose() {
+    summaryController.dispose();
+    itemCountController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickPreferredPickupTime(BuildContext context) async {
+    final now = DateTime.now();
+
+    // First pick date
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: now,
+      lastDate: DateTime(now.year + 1),
+    );
+
+    if (pickedDate == null) return;
+
+    // Then pick time
+    final pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(now),
+    );
+
+    if (pickedTime == null) return;
+
+    final combined = DateTime(
+      pickedDate.year,
+      pickedDate.month,
+      pickedDate.day,
+      pickedTime.hour,
+      pickedTime.minute,
+    );
+
+    setState(() => preferredPickupTime = combined);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final lang = AppLocalizations.of(context)!;
-    // image data binary file
-    Uint8List? imageData;
 
-    // item category
-    int? categoryCount;
-
-    // summary controller
-    TextEditingController summaryController = TextEditingController();
-    // itemCount controller
-    TextEditingController itemCountController = TextEditingController();
-    // priority
-    String? priority;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -41,22 +81,21 @@ class CreateAdPage extends ConsumerWidget {
           icon: Icon(Icons.arrow_back, color: Colorpallets.primary),
           onPressed: () => Navigator.pop(context),
         ),
-        backgroundColor: Color(0xFFDFFFEF),
+        backgroundColor: const Color(0xFFDFFFEF),
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image Picker
             Center(
               child: InkWell(
-                // get image data from gallery
                 onTap: () async {
                   final data = await PickImageServices().pickFromGallery();
                   if (data != null) {
-                    imageData = data;
+                    setState(() => imageData = data);
                   } else {
                     showAppSnakBar('Try Again', Colorpallets.redColor);
                   }
@@ -67,19 +106,24 @@ class CreateAdPage extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(color: Colors.black12, blurRadius: 4),
                     ],
                   ),
-                  child: Icon(Icons.camera_alt_outlined, size: 30),
+                  child: imageData != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.memory(imageData!, fit: BoxFit.cover),
+                        )
+                      : const Icon(Icons.camera_alt_outlined, size: 30),
                 ),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(lang.selectCategory),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
 
-            // drop down for select category
+            // Category dropdown
             DropdownButtonFormField<String>(
               borderRadius: BorderRadius.circular(8),
               dropdownColor: Colorpallets.grey50Color,
@@ -96,36 +140,38 @@ class CreateAdPage extends ConsumerWidget {
                 DropdownMenuItem(value: '5', child: Text(lang.others)),
               ],
               onChanged: (value) {
-                categoryCount = int.parse(value ?? '1');
+                setState(() => categoryCount = int.tryParse(value ?? '1'));
               },
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: const InputDecoration(border: OutlineInputBorder()),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // Summary
             Text(lang.summary),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             TextField(
+              controller: summaryController,
               decoration: InputDecoration(
                 hintText: lang.briefSummary,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
               maxLines: 2,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
-            // nbr of Items
+            // Number of Items
             Text(lang.approxNbr),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             TextField(
+              controller: itemCountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: const InputDecoration(border: OutlineInputBorder()),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // Priority
             Text(lang.priority),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             DropdownButtonFormField<String>(
               borderRadius: BorderRadius.circular(8),
               dropdownColor: Colorpallets.grey50Color,
@@ -134,29 +180,28 @@ class CreateAdPage extends ConsumerWidget {
                 fontSize: 16,
                 color: Colorpallets.blackColor,
               ),
-
               items: [
                 DropdownMenuItem(value: 'high', child: Text(lang.high)),
                 DropdownMenuItem(value: 'medium', child: Text(lang.medium)),
                 DropdownMenuItem(value: 'low', child: Text(lang.low)),
               ],
               onChanged: (value) {
-                priority = value;
+                setState(() => priority = value);
               },
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: const InputDecoration(border: OutlineInputBorder()),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // User Information
             Text(
               lang.userInfo,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
 
             ListTile(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(8),
+                borderRadius: BorderRadius.circular(8),
               ),
               tileColor: Colors.green[50],
               leading: CircleAvatar(
@@ -164,70 +209,90 @@ class CreateAdPage extends ConsumerWidget {
                 child: Icon(Icons.map, color: Colorpallets.whiteColor),
               ),
               title: Text(lang.chooseAdress),
-              trailing: Icon(Icons.arrow_forward_ios),
-              onTap: () async {
-                // choose address from saved address
-                final addessData = await ref
-                    .watch(apiAddressProvider.notifier)
-                    .getAddress(
-                      ref.read(storeUserIdProvider.notifier).getUserid()!,
-                    );
-
-                // Nvigate to my address page
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        EditMyAddressPage(addressModel: addessData),
+                        const EditMyAddressPage(isSelectAddress: true),
                   ),
                 );
               },
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
 
+            // Preferred Pickup Time
             ListTile(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(8),
+                borderRadius: BorderRadius.circular(8),
               ),
               tileColor: Colors.orange[50],
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 backgroundColor: Colors.orange,
-                child: Icon(Icons.access_time, color: Colorpallets.whiteColor),
+                child: Icon(Icons.access_time, color: Colors.white),
               ),
-              title: Text(lang.preferrrdPickup),
-              trailing: Icon(Icons.arrow_forward_ios),
-              onTap: () {
-                // pick up time config
-              },
+              title: Text(
+                preferredPickupTime == null
+                    ? lang.preferrrdPickup
+                    : "${preferredPickupTime!.day}/${preferredPickupTime!.month}/${preferredPickupTime!.year} "
+                          "${preferredPickupTime!.hour.toString().padLeft(2, '0')}:"
+                          "${preferredPickupTime!.minute.toString().padLeft(2, '0')}",
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () => _pickPreferredPickupTime(context),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  ref
-                      .watch(apiAdsProvider.notifier)
-                      .createAds(
-                        context: context,
-                        model: CreateAdsRequestModel(
-                          userId: int.parse(
-                            ref
-                                .watch(storeUserIdProvider.notifier)
-                                .getUserid()!,
-                          ),
-                          categories: [2, 5],
-                          orderSummary: ' summaryController.text,',
-                          itemQty: 5,
-                          priority: 'medium',
-                          userAddressId: 1,
-                          preferredPickupTime: DateTime(3889),
-                          images: [PickupImage(image: imageData!)],
-                        ),
-                      );
+                  final userId = ref
+                      .read(storeUserIdProvider.notifier)
+                      .getUserid();
+                  final addressId = ref.read(addressIdProvider);
+
+                  if (userId == null) {
+                    showAppSnakBar(
+                      "Missing user or address info",
+                      Colorpallets.redColor,
+                    );
+                    return;
+                  }
+
+                  if (imageData != null &&
+                      categoryCount != null &&
+                      priority != null &&
+                      preferredPickupTime != null &&
+                      itemCountController.text.isNotEmpty &&
+                      summaryController.text.isNotEmpty) {
+                    final model = CreateAdsRequestModel(
+                      userId: int.parse(userId),
+                      categories: [categoryCount!],
+                      orderSummary: summaryController.text,
+                      itemQty: int.tryParse(itemCountController.text) ?? 1,
+                      priority: priority!,
+                      userAddressId: addressId,
+                      preferredPickupTime: preferredPickupTime!,
+                      images: [PickupImage(image: imageData!)],
+                    );
+
+                    ref
+                        .read(apiAdsProvider.notifier)
+                        .createAds(context: context, model: model);
+                  } else {
+                    showAppSnakBar(
+                      "Please fill all fields",
+                      Colorpallets.redColor,
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 14,
+                  ),
                 ),
                 child: Text(
                   lang.create,

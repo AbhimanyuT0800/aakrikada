@@ -22,7 +22,6 @@ class CreateAdsRequestModel {
     required this.images,
   });
 
-  // fromJson factory
   factory CreateAdsRequestModel.fromJson(Map<String, dynamic> json) {
     return CreateAdsRequestModel(
       userId: json['user_id'] as int,
@@ -37,8 +36,6 @@ class CreateAdsRequestModel {
           .toList(),
     );
   }
-
-  // toJson method
   Map<String, dynamic> toJson() {
     return {
       "user_id": userId,
@@ -47,7 +44,15 @@ class CreateAdsRequestModel {
       "item_qty": itemQty,
       "priority": priority,
       "user_address_id": userAddressId,
-      "preferred_pickup_time": preferredPickupTime.toIso8601String(),
+      // ✅ Keep only seconds, force milliseconds = .000Z
+      "preferred_pickup_time": DateTime.utc(
+        preferredPickupTime.year,
+        preferredPickupTime.month,
+        preferredPickupTime.day,
+        preferredPickupTime.hour,
+        preferredPickupTime.minute,
+        preferredPickupTime.second,
+      ).toIso8601String(),
       "images": images.map((e) => e.toJson()).toList(),
     };
   }
@@ -58,13 +63,14 @@ class PickupImage {
 
   PickupImage({required this.image});
 
-  // Decode base64 → Uint8List
   factory PickupImage.fromJson(Map<String, dynamic> json) {
     final base64String = json['image'] ?? '';
     return PickupImage(image: base64.decode(base64String.split(',').last));
   }
+
   Map<String, dynamic> toJson() {
     final base64String = base64Encode(image);
+    // ✅ Always include prefix since success body includes it
     return {"image": "data:image/jpeg;base64,$base64String"};
   }
 }

@@ -11,7 +11,7 @@ class PickImageServices {
     try {
       // Pick image from gallery
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-      log(image.toString());
+
       if (image != null) {
         // Convert to binary (Uint8List)
         final Uint8List bytes = await image.readAsBytes();

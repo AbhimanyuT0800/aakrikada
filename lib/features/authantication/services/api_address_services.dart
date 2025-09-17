@@ -97,7 +97,7 @@ class ApiAddressServices {
     log(model.toJson().toString());
     try {
       final Response response = await _dio.post(
-        AppUrls.addNewAdress,
+        AppUrls.editAdress,
         data: model.toJson(),
       );
       if (response.statusCode == 200) {

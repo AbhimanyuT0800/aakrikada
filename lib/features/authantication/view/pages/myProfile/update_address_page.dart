@@ -237,7 +237,7 @@ class _UpdateAdddressBottomSheetState
                         lng: '74.85',
                       ),
                     );
-
+                ref.invalidate(getAddressProvider);
                 // await ref.read(apiAddressProvider.notifier).
                 Navigator.pop(context);
               } else {

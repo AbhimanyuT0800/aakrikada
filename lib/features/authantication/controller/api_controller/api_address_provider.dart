@@ -52,7 +52,7 @@ class ApiAddress extends _$ApiAddress {
         Colorpallets.redColor,
       );
     } finally {
-      await getAddress(id);
+      // await getAddress(id);
       state = false;
     }
   }

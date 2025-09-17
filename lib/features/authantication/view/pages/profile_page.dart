@@ -1,6 +1,4 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
-import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
-import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_address_page.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_profile_page.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/logout_confirm_alert_box.dart';
@@ -100,20 +98,19 @@ class ProfilePage extends ConsumerWidget {
                           ),
                           title: lang.myAdress,
                           onTap: () async {
-                            final addessData = await ref
-                                .watch(apiAddressProvider.notifier)
-                                .getAddress(
-                                  ref
-                                      .read(storeUserIdProvider.notifier)
-                                      .getUserid()!,
-                                );
+                            // final addessData = await ref
+                            //     .watch(apiAddressProvider.notifier)
+                            //     .getAddress(
+                            //       ref
+                            //           .read(storeUserIdProvider.notifier)
+                            //           .getUserid()!,
+                            //     );
 
                             // Nvigate to my address page
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    EditMyAddressPage(addressModel: addessData),
+                                builder: (context) => EditMyAddressPage(),
                               ),
                             );
                           },

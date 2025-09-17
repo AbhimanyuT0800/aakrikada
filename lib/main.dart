@@ -37,6 +37,7 @@ class MainApp extends ConsumerWidget {
       home: ref.watch(storeUserIdProvider) != null
           ? MyBottomNavigationWidget()
           : ChooseLangPage(),
+      // home: ChooseLangPage(),
     );
   }
 }

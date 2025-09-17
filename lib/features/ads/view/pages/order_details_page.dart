@@ -1,3 +1,4 @@
+import 'package:aakrikada/features/ads/domain/model/get_user_ads_model.dart';
 import 'package:aakrikada/features/ads/view/widgets/quotes_card_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +6,9 @@ import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/ads/view/widgets/listed_item_widget.dart';
 
 class OrderDetailsPage extends StatelessWidget {
-  const OrderDetailsPage({super.key});
+  const OrderDetailsPage({super.key, required this.adsData});
 
+  final AdData adsData;
   @override
   Widget build(BuildContext context) {
     // Language provider
@@ -65,7 +67,7 @@ class OrderDetailsPage extends StatelessWidget {
                   //  item card sctn
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ItemDetailsCard(),
+                    child: ItemDetailsCard(adsData: adsData),
                   ),
 
                   const SizedBox(height: 16),

@@ -1,7 +1,6 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/ads/domain/model/categories_model.dart';
 import 'package:aakrikada/features/ads/view/pages/create_ads_page.dart';
-import 'package:aakrikada/features/ads/view/widgets/listed_item_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -171,7 +170,8 @@ class HomePage extends ConsumerWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        ListedItemWidget(),
+                        // ListedItemWidget(),
+                        Center(child: Text('Content 1')),
                         Center(child: Text('Content 1')),
                         Center(child: Text('Content 2')),
                         Center(child: Text('Content 3')),
