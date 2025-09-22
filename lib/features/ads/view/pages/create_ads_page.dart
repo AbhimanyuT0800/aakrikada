@@ -280,6 +280,8 @@ class _CreateAdPageState extends ConsumerState<CreateAdPage> {
                     ref
                         .read(apiAdsProvider.notifier)
                         .createAds(context: context, model: model);
+
+                    ref.invalidate(apiAdsProvider);
                   } else {
                     showAppSnakBar(
                       "Please fill all fields",
@@ -294,14 +296,22 @@ class _CreateAdPageState extends ConsumerState<CreateAdPage> {
                     vertical: 14,
                   ),
                 ),
-                child: Text(
-                  lang.create,
-                  style: TextStyle(
-                    letterSpacing: 1,
-                    color: Colorpallets.whiteColor,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                child: ref.watch(apiAdsProvider)
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colorpallets.whiteColor,
+                        ),
+                      )
+                    : Text(
+                        lang.create,
+                        style: TextStyle(
+                          letterSpacing: 1,
+                          color: Colorpallets.whiteColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
               ),
             ),
           ],

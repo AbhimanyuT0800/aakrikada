@@ -106,146 +106,157 @@ class _UpdateAdddressBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        top: 20,
-        bottom: MediaQuery.of(context).padding.bottom + 12,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Handle
-          Container(
-            width: 40,
-            height: 4,
-            margin: const EdgeInsets.only(bottom: 20),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade400,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-
-          // House Name
-          TextField(
-            controller: addressController,
-            decoration: InputDecoration(
-              labelText: "House Name",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 20,
+          bottom: MediaQuery.of(context).padding.bottom + 12,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Handle
+            Container(
+              width: 40,
+              height: 4,
+              margin: const EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade400,
+                borderRadius: BorderRadius.circular(2),
               ),
             ),
-          ),
-          const SizedBox(height: 16),
 
-          // Town
-          TextField(
-            controller: townController,
-            decoration: InputDecoration(
-              labelText: "Town",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+            // House Name
+            TextField(
+              controller: addressController,
+              decoration: InputDecoration(
+                labelText: "House Name",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 16),
+            const SizedBox(height: 16),
 
-          // District dropdown
-          isLoadingDistricts
-              ? Center(
-                  child: CircularProgressIndicator(color: Colorpallets.primary),
-                )
-              : DropdownButtonFormField<String>(
-                  value: selectedDistrict,
-                  decoration: InputDecoration(
-                    labelText: "District",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  items:
-                      allDistricts?.data
-                          .map(
-                            (d) => DropdownMenuItem(
-                              value: d.district,
-                              child: Text(d.district),
-                            ),
-                          )
-                          .toList() ??
-                      [],
-                  onChanged: (val) {
-                    setState(() {
-                      selectedDistrict = val;
-                    });
-                    if (val != null) {
-                      log(val);
-                      fetchAreas(val);
-                    }
-                  },
+            // Town
+            TextField(
+              controller: townController,
+              decoration: InputDecoration(
+                labelText: "Town",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-          const SizedBox(height: 16),
+              ),
+            ),
+            const SizedBox(height: 16),
 
-          // Area dropdown
-          isLoadingAreas
-              ? Center(
-                  child: CircularProgressIndicator(color: Colorpallets.primary),
-                )
-              : DropdownButtonFormField<String>(
-                  value: selectedArea,
-                  decoration: InputDecoration(
-                    labelText: "Area",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+            // District dropdown
+            isLoadingDistricts
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Colorpallets.primary,
                     ),
-                  ),
-                  items: allAreas
-                      .map(
-                        (a) =>
-                            DropdownMenuItem(value: a.id, child: Text(a.area)),
-                      )
-                      .toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      selectedArea = val;
-                    });
-                  },
-                ),
-          const SizedBox(height: 24),
-
-          // Save button
-          AuthCommonButton(
-            tittle: "Update Address",
-            onpressed: () async {
-              if (selectedArea != null &&
-                  selectedDistrict != null &&
-                  townController.text.isNotEmpty &&
-                  addressController.text.isNotEmpty) {
-                await ref
-                    .read(apiAddressProvider.notifier)
-                    .updateAnAddress(
-                      model: UpdateAddressModel(
-                        addressId: int.parse(widget.model.id),
-                        userId: int.parse(
-                          ref.read(storeUserIdProvider.notifier).getUserid()!,
-                        ),
-                        address: addressController.text,
-                        area: selectedArea ?? 'vadakara',
-                        town: townController.text,
-                        district: selectedDistrict ?? 'calicut',
-                        lat: '12.9141',
-                        lng: '74.85',
+                  )
+                : DropdownButtonFormField<String>(
+                    value: selectedDistrict,
+                    decoration: InputDecoration(
+                      labelText: "District",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                    );
-                ref.invalidate(getAddressProvider);
-                // await ref.read(apiAddressProvider.notifier).
-                Navigator.pop(context);
-              } else {
-                showAppSnakBar('Fill all the fields', Colorpallets.blackColor);
-              }
-            },
-          ),
-        ],
+                    ),
+                    items:
+                        allDistricts?.data
+                            .map(
+                              (d) => DropdownMenuItem(
+                                value: d.district,
+                                child: Text(d.district),
+                              ),
+                            )
+                            .toList() ??
+                        [],
+                    onChanged: (val) {
+                      setState(() {
+                        selectedDistrict = val;
+                      });
+                      if (val != null) {
+                        log(val);
+                        fetchAreas(val);
+                      }
+                    },
+                  ),
+            const SizedBox(height: 16),
+
+            // Area dropdown
+            isLoadingAreas
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Colorpallets.primary,
+                    ),
+                  )
+                : DropdownButtonFormField<String>(
+                    value: selectedArea,
+                    decoration: InputDecoration(
+                      labelText: "Area",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    items: allAreas
+                        .map(
+                          (a) => DropdownMenuItem(
+                            value: a.id,
+                            child: Text(a.area),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        selectedArea = val;
+                      });
+                    },
+                  ),
+            const SizedBox(height: 24),
+
+            // Save button
+            AuthCommonButton(
+              tittle: "Update Address",
+              onpressed: () async {
+                if (selectedArea != null &&
+                    selectedDistrict != null &&
+                    townController.text.isNotEmpty &&
+                    addressController.text.isNotEmpty) {
+                  final model = UpdateAddressModel(
+                    addressId: int.parse(widget.model.id),
+                    userId: int.parse(
+                      ref.read(storeUserIdProvider.notifier).getUserid()!,
+                    ),
+                    address: addressController.text,
+                    area: selectedArea ?? 'vadakara',
+                    town: townController.text,
+                    district: selectedDistrict ?? 'calicut',
+                    lat: '12.9141',
+                    lng: '74.85',
+                  );
+                  await ref
+                      .read(apiAddressProvider.notifier)
+                      .updateAnAddress(model: model);
+                  log(model.toJson().toString());
+                  ref.invalidate(getAddressProvider);
+                  // await ref.read(apiAddressProvider.notifier).
+                  Navigator.pop(context);
+                } else {
+                  showAppSnakBar(
+                    'Fill all the fields',
+                    Colorpallets.blackColor,
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -34,7 +34,9 @@ class MainApp extends ConsumerWidget {
       locale: Locale(ref.watch(appLanguageProvider)),
       supportedLocales: [Locale('en'), Locale('hi'), Locale('ml')],
       scaffoldMessengerKey: scaffoldMessngerKey,
-      home: ref.watch(storeUserIdProvider) != null
+      home:
+          ref.watch(storeUserIdProvider.notifier).getUserid()?.isNotEmpty ??
+              false
           ? MyBottomNavigationWidget()
           : ChooseLangPage(),
       // home: ChooseLangPage(),

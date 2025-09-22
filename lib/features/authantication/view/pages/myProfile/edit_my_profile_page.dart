@@ -1,16 +1,32 @@
+import 'dart:developer';
+import 'dart:typed_data';
+
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/core/utils/show_app_snakbar.dart';
+import 'package:aakrikada/features/ads/services/pick_image_services.dart';
+import 'package:aakrikada/features/authantication/controller/api_controller/api_auth_provider.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
+import 'package:aakrikada/features/authantication/domain/model/user_upadate_request_model.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/features/authantication/view/widgets/edit_text_field_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EditMyProfilePage extends StatelessWidget {
-  EditMyProfilePage({super.key});
+class EditMyProfilePage extends ConsumerStatefulWidget {
+  const EditMyProfilePage({super.key});
+
+  @override
+  ConsumerState<EditMyProfilePage> createState() => _EditMyProfilePageState();
+}
+
+class _EditMyProfilePageState extends ConsumerState<EditMyProfilePage> {
   final nameController = TextEditingController(text: "Aneesh");
   final emailController = TextEditingController(text: "abc0800@gmail.com");
   final phoneController = TextEditingController(text: "9090909009");
+
+  Uint8List? imageData;
+
   @override
   Widget build(BuildContext context) {
     // Language provider
@@ -23,7 +39,6 @@ class EditMyProfilePage extends StatelessWidget {
           // Gradient header
           Container(
             width: double.infinity,
-
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Color(0xFFDCFFF1), Color(0xFFCEF0FC)],
@@ -44,7 +59,7 @@ class EditMyProfilePage extends StatelessWidget {
                     },
                     icon: Icon(Icons.arrow_back, color: Colorpallets.primary),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     lang.myProfile,
                     style: TextStyle(
@@ -63,48 +78,41 @@ class EditMyProfilePage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   // Profile image
                   InkWell(
                     onTap: () async {
-                      if (await Permission.photos.request().isGranted &&
-                          await Permission.storage.request().isGranted &&
-                          await Permission.camera.request().isGranted) {
-                        // Both permissions are granted
+                      // if (await Permission.photos.request().isGranted &&
+                      //     await Permission.storage.request().isGranted &&
+                      //     await Permission.camera.request().isGranted) {
+                      //   // Both permissions are granted
 
-                        // final ImagePicker picker = ImagePicker();
-                        // final XFile? image = await picker.pickImage(
-                        //   source: ImageSource.gallery,
-                        // );
-
-                        // if (image != null) {
-                        //   // Use the picked image, e.g., display it or upload it
-                        //   print('Image path: ${image.path}');
-                        // }
-
-                        final ImagePicker picker = ImagePicker();
-                        final XFile? photo = await picker.pickImage(
-                          source: ImageSource.camera,
-                        );
-
-                        if (photo != null) {
-                          // Use the captured photo
-                          print('Photo path: ${photo.path}');
-                        }
+                      final data = await PickImageServices().pickFromGallery();
+                      log(data.toString());
+                      if (data != null) {
+                        setState(() => imageData = data);
                       } else {
-                        // Handle the case where permissions are not granted
+                        showAppSnakBar('Try Again', Colorpallets.redColor);
                       }
+                      // } else {
+                      //   // Handle the case where permissions are not granted
+                      // }
                     },
                     child: Container(
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/img_avathar.jpg'),
-                          fit: BoxFit.cover,
-                        ),
                       ),
+                      child: imageData != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.memory(
+                                imageData!,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Image.asset('assets/images/img_avathar.jpg'),
                     ),
                   ),
 
@@ -118,15 +126,40 @@ class EditMyProfilePage extends StatelessWidget {
                   // Email field
                   EditTextFieldWidget(controller: emailController),
 
-                  const SizedBox(height: 16),
-
-                  // Phone field
-                  EditTextFieldWidget(controller: phoneController),
-
                   const SizedBox(height: 24),
 
                   // Update button
-                  AuthCommonButton(tittle: 'up', onpressed: () {}),
+                  AuthCommonButton(
+                    tittle: 'up',
+                    onpressed: () {
+                      //
+                      if (imageData != null) {
+                        final profileImg = PickupProfileImage(
+                          image: imageData!,
+                        );
+                        ref
+                            .watch(apiAuthProvider.notifier)
+                            .updateProfileDetails(
+                              model: UserUpdateRequestModel(
+                                userId: int.parse(
+                                  ref
+                                      .read(storeUserIdProvider.notifier)
+                                      .getUserid()!,
+                                ),
+                                name: nameController.text,
+                                email: emailController.text,
+                                userImage: profileImg.toJson(),
+                              ),
+                              context: context,
+                            );
+                      } else {
+                        showAppSnakBar(
+                          'Choose profile',
+                          Colorpallets.blackColor,
+                        );
+                      }
+                    },
+                  ),
                   const SizedBox(height: 20),
                 ],
               ),

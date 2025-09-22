@@ -18,51 +18,61 @@ class MyProductsPage extends ConsumerWidget {
       backgroundColor: Colorpallets.whiteColor,
       body: adsData.when(
         data: (data) {
-          return Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFFDCFFF1), Color(0xFFCEF0FC)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
+          return RefreshIndicator(
+            color: Colorpallets.primary,
+            onRefresh: () async {
+              ref.invalidate(getuserAdsProvider);
+              await Future.delayed(Duration(seconds: 1));
+            },
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFFDCFFF1), Color(0xFFCEF0FC)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
               ),
-            ),
-            child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                    child: Text(
-                      AppLocalizations.of(context)!.myOders,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colorpallets.primary,
+              child: SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 16,
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colorpallets.whiteColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(24),
-                          topRight: Radius.circular(24),
+                      child: Text(
+                        AppLocalizations.of(context)!.myOders,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colorpallets.primary,
                         ),
                       ),
-                      child: data != null
-                          ? ListView.builder(
-                              itemCount: data.data.length,
-                              itemBuilder: (context, index) =>
-                                  ItemDetailsCard(adsData: data.data[index]),
-                            )
-                          : Center(child: Text('No data Found')),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 16),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colorpallets.whiteColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                          ),
+                        ),
+                        child: data != null
+                            ? ListView.builder(
+                                itemCount: data.data.length,
+                                itemBuilder: (context, index) =>
+                                    ItemDetailsCard(adsData: data.data[index]),
+                              )
+                            : Center(child: Text('No data Found')),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

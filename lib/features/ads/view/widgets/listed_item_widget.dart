@@ -16,9 +16,21 @@ import 'package:flutter/material.dart';
 // }
 
 class ItemDetailsCard extends StatelessWidget {
-  const ItemDetailsCard({super.key, required this.adsData});
+  ItemDetailsCard({
+    super.key,
+    required this.adsData,
+    this.isStatusNeeded = true,
+  });
   final AdData adsData;
-
+  final bool isStatusNeeded;
+  final categoryData = [
+    "",
+    "Iron",
+    "Newspaper",
+    "Electronics",
+    "Plastics",
+    "Others",
+  ];
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -39,27 +51,42 @@ class ItemDetailsCard extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           children: [
-            SizedBox(width: 88, child: Image.network(adsData.image)),
+            SizedBox(
+              width: 60,
+              height: 60,
+              child: Image.network(adsData.image, fit: BoxFit.cover),
+            ),
             SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  adsData.categories,
+                  categoryData[int.parse(adsData.categories)],
                   style: TextStyle(fontSize: 16, color: Colorpallets.greyColor),
                 ),
-                Text(
-                  adsData.orderSummary,
-                  style: TextStyle(
-                    color: Colorpallets.greenColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                SizedBox(
+                  width: 198,
+                  child: Text(
+                    adsData.orderSummary,
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(
+                      color: Colorpallets.greenColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-                Text(
-                  '11 july 2002,11:00 am',
-                  style: TextStyle(fontSize: 16, color: Colorpallets.greyColor),
+                SizedBox(
+                  width: 198,
+                  child: Text(
+                    adsData.formattedPickupTime,
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colorpallets.greyColor,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -68,10 +95,12 @@ class ItemDetailsCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0),
-                  child: Text(
-                    adsData.status,
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
+                  child: isStatusNeeded
+                      ? Text(
+                          adsData.status,
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        )
+                      : SizedBox(),
                 ),
                 IconButton(
                   onPressed: () {

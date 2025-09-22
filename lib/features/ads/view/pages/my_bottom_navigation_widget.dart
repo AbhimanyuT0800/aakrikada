@@ -21,7 +21,7 @@ class MyBottomNavigationWidget extends HookWidget {
     useEffect(() {
       Future.microtask(() async {
         final categoryData = await ApiAdsServices().getAdCategories();
-        categoryModel.value = categoryData.data; // update state
+        categoryModel.value = categoryData.data;
       });
       return null;
     }, []);

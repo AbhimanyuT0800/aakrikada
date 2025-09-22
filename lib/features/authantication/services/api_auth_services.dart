@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:aakrikada/api_key/api_key.dart';
 import 'package:aakrikada/core/constatnts/app_urls.dart';
 import 'package:aakrikada/core/utils/api_exceptions.dart';
 import 'package:aakrikada/features/authantication/domain/model/otp_verified_model.dart';
+import 'package:aakrikada/features/authantication/domain/model/user_upadate_request_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/verified_user_model.dart';
 import 'package:dio/dio.dart';
 
@@ -81,6 +84,37 @@ class ApiAuthServices {
       );
       if (response.statusCode == 200 && response.data != null) {
         return VerifiedUserModel.fromJson(response.data);
+      } else {
+        throw Exception("Unexpected server response");
+      }
+    } on DioException catch (e) {
+      throw Exception(handleDioError(e));
+    } catch (e) {
+      throw Exception(" ${e.toString()}");
+    }
+  }
+
+  // update profile details
+
+  Future<OtpVerifyModel?> updateProfile(
+    UserUpdateRequestModel userModel,
+  ) async {
+    try {
+      log('st');
+      Response response = await _dio.post(
+        AppUrls.updateProfile,
+        data: userModel.toJson(),
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+            "X-lang": "en",
+            "Accept": "application/json",
+            "X-API-KEY": ApiKey.apiKeyValue,
+          },
+        ),
+      );
+      if (response.statusCode == 200 && response.data != null) {
+        return OtpVerifyModel.fromJson(response.data);
       } else {
         throw Exception("Unexpected server response");
       }

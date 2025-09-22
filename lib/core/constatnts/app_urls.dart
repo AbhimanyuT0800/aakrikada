@@ -3,6 +3,7 @@ class AppUrls {
   static const verifyUser = '/auth/verify';
   static const verifyOtp = '/auth/verify_otp';
   static const resendOtp = '/auth/resend_otp';
+  static const updateProfile = '/user/update_profile';
 
   // ads
   static const getCategories = '/user/get_categories';

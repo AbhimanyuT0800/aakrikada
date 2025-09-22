@@ -1,6 +1,7 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/ads/domain/model/categories_model.dart';
 import 'package:aakrikada/features/ads/view/pages/create_ads_page.dart';
+import 'package:aakrikada/features/ads/view/pages/home/all_category_page.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -171,7 +172,7 @@ class HomePage extends ConsumerWidget {
                     child: TabBarView(
                       children: [
                         // ListedItemWidget(),
-                        Center(child: Text('Content 1')),
+                        AllCategoryPage(),
                         Center(child: Text('Content 1')),
                         Center(child: Text('Content 2')),
                         Center(child: Text('Content 3')),
@@ -198,7 +199,9 @@ class HomePage extends ConsumerWidget {
                 backgroundColor: Colorpallets.pinkColor,
               ),
             )
-          : Center(child: CircularProgressIndicator()),
+          : Center(
+              child: CircularProgressIndicator(color: Colorpallets.primary),
+            ),
     );
   }
 }

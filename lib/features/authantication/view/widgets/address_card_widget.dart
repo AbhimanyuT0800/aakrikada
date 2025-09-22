@@ -44,6 +44,28 @@ class AddressCardWidget extends ConsumerWidget {
                 ),
                 Spacer(),
 
+                // edit address
+                IconButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(24),
+                        ),
+                      ),
+                      builder: (context) =>
+                          UpdateAddressBottomSheet(model: addressData),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.edit_location_alt_sharp,
+                    color: Colorpallets.seconday,
+                    size: 24,
+                  ),
+                ),
+
                 // delete address
                 IconButton(
                   onPressed: () async {
@@ -62,23 +84,6 @@ class AddressCardWidget extends ConsumerWidget {
                     color: Colorpallets.redColor,
                     size: 32,
                   ),
-                ),
-                // edit address
-                IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(24),
-                        ),
-                      ),
-                      builder: (context) =>
-                          UpdateAddressBottomSheet(model: addressData),
-                    );
-                  },
-                  icon: Icon(Icons.edit),
                 ),
               ],
             ),

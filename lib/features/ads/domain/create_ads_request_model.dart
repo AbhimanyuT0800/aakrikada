@@ -70,7 +70,6 @@ class PickupImage {
 
   Map<String, dynamic> toJson() {
     final base64String = base64Encode(image);
-    // ✅ Always include prefix since success body includes it
     return {"image": "data:image/jpeg;base64,$base64String"};
   }
 }

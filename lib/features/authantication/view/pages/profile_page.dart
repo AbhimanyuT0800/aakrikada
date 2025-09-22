@@ -1,8 +1,10 @@
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_address_page.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_profile_page.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/logout_confirm_alert_box.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/select_language_page.dart';
+import 'package:aakrikada/features/authantication/view/pages/phone_input_page.dart';
 import 'package:aakrikada/features/authantication/view/widgets/profile_card_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +51,7 @@ class ProfilePage extends ConsumerWidget {
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 14, vertical: 16),
                   decoration: BoxDecoration(
-                    color: Colorpallets.grey50Color,
+                    color: Colorpallets.whiteColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(24),
                       topRight: Radius.circular(24),
@@ -98,14 +100,6 @@ class ProfilePage extends ConsumerWidget {
                           ),
                           title: lang.myAdress,
                           onTap: () async {
-                            // final addessData = await ref
-                            //     .watch(apiAddressProvider.notifier)
-                            //     .getAddress(
-                            //       ref
-                            //           .read(storeUserIdProvider.notifier)
-                            //           .getUserid()!,
-                            //     );
-
                             // Nvigate to my address page
                             Navigator.push(
                               context,
@@ -146,7 +140,16 @@ class ProfilePage extends ConsumerWidget {
                               context: context,
 
                               onConfirm: () {
-                                // Logout methosds
+                                ref
+                                    .read(storeUserIdProvider.notifier)
+                                    .addUserId('');
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PhoneInputPage(),
+                                  ),
+                                  (route) => false,
+                                );
                               },
                             );
                           },

@@ -4,7 +4,10 @@ import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
 import 'package:aakrikada/features/ads/view/pages/my_bottom_navigation_widget.dart';
 import 'package:aakrikada/features/authantication/domain/model/otp_verified_model.dart';
+import 'package:aakrikada/features/authantication/domain/model/user_upadate_request_model.dart';
 import 'package:aakrikada/features/authantication/services/api_auth_services.dart';
+import 'package:aakrikada/features/authantication/services/shared_pref_service.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_profile_page.dart';
 import 'package:aakrikada/features/authantication/view/pages/otp_verification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -62,12 +65,20 @@ class ApiAuth extends _$ApiAuth {
     try {
       final resp = await ApiAuthServices().verifyOtpService(phn, otp);
 
-      // if responce has data navigate to otp verification section
+      // if responce has data navigate to home page section
       if (resp != null) {
+        log(resp.toString());
+        if (resp.data.name.isEmpty) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EditMyProfilePage()),
+          );
+        }
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => MyBottomNavigationWidget()),
         );
+
         // login sucess snak bar after navigate to home page
         showAppSnakBar('Login Successful', Colorpallets.greenColor);
 
@@ -104,6 +115,43 @@ class ApiAuth extends _$ApiAuth {
       // if responce has data navigate to otp verification section
       if (resp != null) {
         showAppSnakBar('OTP sent successfuly', Colorpallets.greenColor);
+      } else {
+        showAppSnakBar(
+          'Something went wrong... Try again',
+          Colorpallets.blackColor,
+        );
+      }
+    } catch (e) {
+      // catch all error throw from api service
+      showAppSnakBar(
+        e.toString().replaceFirst("Exception: ", ""),
+        Colorpallets.redColor,
+      );
+    } finally {
+      state = false;
+    }
+  }
+
+  // update profile info provider
+  Future<void> updateProfileDetails({
+    required UserUpdateRequestModel model,
+
+    required BuildContext context,
+  }) async {
+    log('pr-st');
+    state = true;
+    try {
+      final resp = await ApiAuthServices().updateProfile(model);
+
+      // if responce has data navigate store id on shares pref
+      // and navigate to home paage
+      if (resp != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MyBottomNavigationWidget()),
+        );
+        showAppSnakBar(resp.message, Colorpallets.greenColor);
+        SharedPrefService.addUserId(resp.data.id);
       } else {
         showAppSnakBar(
           'Something went wrong... Try again',

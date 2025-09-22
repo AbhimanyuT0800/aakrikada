@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class GetUserAdsModel {
   final String status;
   final List<AdData> data;
@@ -31,7 +33,7 @@ class AdData {
   final String priority;
   final List<String> images;
   final String userAddressId;
-  final String preferredPickupTime;
+  final String preferredPickupTime; // keep raw string
   final String? quoteAmount;
   final String? actualAmount;
   final String? gst;
@@ -95,6 +97,18 @@ class AdData {
       updatedAt: json['updated_at'] ?? '',
       image: json['image'] ?? '',
     );
+  }
+
+  ///  Formatted preferred pickup time
+  String get formattedPickupTime {
+    try {
+      final dateTime = DateFormat(
+        "yyyy-MM-dd HH:mm:ss",
+      ).parse(preferredPickupTime);
+      return DateFormat("d MMMM yyyy, hh:mm a").format(dateTime);
+    } catch (e) {
+      return preferredPickupTime;
+    }
   }
 
   Map<String, dynamic> toJson() {

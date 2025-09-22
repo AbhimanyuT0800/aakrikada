@@ -94,7 +94,6 @@ class ApiAddressServices {
 
   // Edit address
   Future<void> updateAddress(UpdateAddressModel model) async {
-    log(model.toJson().toString());
     try {
       final Response response = await _dio.post(
         AppUrls.editAdress,

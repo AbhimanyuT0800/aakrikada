@@ -35,8 +35,7 @@ void showLogoutConfirmationDialog({
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
-              onConfirm(); // handle logout here
+              onConfirm();
             },
             child: Text(
               lang.yes,
