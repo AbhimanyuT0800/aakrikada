@@ -35,4 +35,19 @@ class StoreUserId extends _$StoreUserId {
     await SharedPrefService.addUserId(id);
     state = id;
   }
+
+  Future<void> addUserDetails({required UserDetails details}) async {
+    await SharedPrefService.updateUserDetails(details);
+  }
+
+  UserDetails getUserDeatils() {
+    return SharedPrefService.getUserDetails();
+  }
+}
+
+class UserDetails {
+  final String name;
+  final String email;
+  final String img;
+  UserDetails({required this.name, required this.img, required this.email});
 }

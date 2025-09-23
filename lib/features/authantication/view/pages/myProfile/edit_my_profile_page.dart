@@ -7,6 +7,7 @@ import 'package:aakrikada/features/ads/services/pick_image_services.dart';
 import 'package:aakrikada/features/authantication/controller/api_controller/api_auth_provider.dart';
 import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/domain/model/user_upadate_request_model.dart';
+import 'package:aakrikada/features/authantication/services/shared_pref_service.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/features/authantication/view/widgets/edit_text_field_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
@@ -21,17 +22,35 @@ class EditMyProfilePage extends ConsumerStatefulWidget {
 }
 
 class _EditMyProfilePageState extends ConsumerState<EditMyProfilePage> {
-  final nameController = TextEditingController(text: "Aneesh");
-  final emailController = TextEditingController(text: "abc0800@gmail.com");
-  final phoneController = TextEditingController(text: "9090909009");
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
 
   Uint8List? imageData;
+  String? userImg;
+
+  @override
+  void initState() {
+    final userData = SharedPrefService.getUserDetails();
+    log(userData.email);
+    if (userData.email.isNotEmpty) {
+      log(userData.email);
+      nameController.text = userData.name;
+      emailController.text = userData.email;
+      if (userData.img.isNotEmpty) {
+        userImg = userData.img;
+      }
+    }
+
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     // Language provider
     final lang = AppLocalizations.of(context)!;
 
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
       body: Column(
@@ -76,92 +95,133 @@ class _EditMyProfilePageState extends ConsumerState<EditMyProfilePage> {
           // Main content scrollable
           Expanded(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  // Profile image
-                  InkWell(
-                    onTap: () async {
-                      // if (await Permission.photos.request().isGranted &&
-                      //     await Permission.storage.request().isGranted &&
-                      //     await Permission.camera.request().isGranted) {
-                      //   // Both permissions are granted
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    // Profile image
+                    InkWell(
+                      onTap: () async {
+                        // if (await Permission.photos.request().isGranted &&
+                        //     await Permission.storage.request().isGranted &&
+                        //     await Permission.camera.request().isGranted) {
+                        //   // Both permissions are granted
 
-                      final data = await PickImageServices().pickFromGallery();
-                      log(data.toString());
-                      if (data != null) {
-                        setState(() => imageData = data);
-                      } else {
-                        showAppSnakBar('Try Again', Colorpallets.redColor);
-                      }
-                      // } else {
-                      //   // Handle the case where permissions are not granted
-                      // }
-                    },
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: imageData != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.memory(
-                                imageData!,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          : Image.asset('assets/images/img_avathar.jpg'),
-                    ),
-                  ),
+                        final data = await PickImageServices()
+                            .pickFromGallery();
 
-                  const SizedBox(height: 30),
-
-                  // Name field
-                  EditTextFieldWidget(controller: nameController),
-
-                  const SizedBox(height: 16),
-
-                  // Email field
-                  EditTextFieldWidget(controller: emailController),
-
-                  const SizedBox(height: 24),
-
-                  // Update button
-                  AuthCommonButton(
-                    tittle: 'up',
-                    onpressed: () {
-                      //
-                      if (imageData != null) {
-                        final profileImg = PickupProfileImage(
-                          image: imageData!,
-                        );
-                        ref
-                            .watch(apiAuthProvider.notifier)
-                            .updateProfileDetails(
-                              model: UserUpdateRequestModel(
-                                userId: int.parse(
-                                  ref
-                                      .read(storeUserIdProvider.notifier)
-                                      .getUserid()!,
+                        if (data != null) {
+                          setState(() => imageData = data);
+                        } else {
+                          showAppSnakBar('Try Again', Colorpallets.redColor);
+                        }
+                        // } else {
+                        //   // Handle the case where permissions are not granted
+                        // }
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: imageData != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.memory(
+                                  imageData!,
+                                  fit: BoxFit.cover,
                                 ),
-                                name: nameController.text,
-                                email: emailController.text,
-                                userImage: profileImg.toJson(),
-                              ),
-                              context: context,
-                            );
-                      } else {
-                        showAppSnakBar(
-                          'Choose profile',
-                          Colorpallets.blackColor,
+                              )
+                            : userImg != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  userImg!,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Image.asset('assets/images/img_avathar.jpg'),
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // Name field
+                    EditTextFieldWidget(
+                      controller: nameController,
+                      hintText: 'Enter your name',
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Name is required';
+                        }
+                        if (value.trim().length < 3) {
+                          return 'Name must be at least 3 characters';
+                        }
+                        return null;
+                      },
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Email field
+                    EditTextFieldWidget(
+                      controller: emailController,
+                      hintText: 'Enter your email',
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Email is required';
+                        }
+                        final emailRegex = RegExp(
+                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                         );
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                ],
+                        if (!emailRegex.hasMatch(value.trim())) {
+                          return 'Enter a valid email';
+                        }
+                        return null;
+                      },
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Update button
+                    AuthCommonButton(
+                      tittle: 'Update',
+                      onpressed: () {
+                        if (formKey.currentState!.validate()) {
+                          //
+                          if (imageData != null) {
+                            final profileImg = PickupProfileImage(
+                              image: imageData!,
+                            );
+                            ref
+                                .watch(apiAuthProvider.notifier)
+                                .updateProfileDetails(
+                                  model: UserUpdateRequestModel(
+                                    userId: int.parse(
+                                      ref
+                                          .read(storeUserIdProvider.notifier)
+                                          .getUserid()!,
+                                    ),
+                                    name: nameController.text,
+                                    email: emailController.text,
+                                    userImage: profileImg.toJson(),
+                                  ),
+                                  context: context,
+                                );
+                          } else {
+                            showAppSnakBar(
+                              'Choose profile',
+                              Colorpallets.blackColor,
+                            );
+                          }
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ),
             ),
           ),

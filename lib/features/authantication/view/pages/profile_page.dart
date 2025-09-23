@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/view/pages/myProfile/edit_my_address_page.dart';
@@ -17,6 +19,8 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // language provider
     final lang = AppLocalizations.of(context)!;
+
+    final userData = ref.watch(storeUserIdProvider.notifier).getUserDeatils();
 
     return Scaffold(
       body: Container(
@@ -64,11 +68,18 @@ class ProfilePage extends ConsumerWidget {
                         SizedBox(
                           width: 88,
                           height: 88,
-                          child: Image.asset('assets/images/img_avathar.jpg'),
+                          child: ClipOval(
+                            child: userData.img.isNotEmpty
+                                ? Image.network(userData.img, fit: BoxFit.fill)
+                                : Image.asset(
+                                    'assets/images/img_avathar.jpg',
+                                    fit: BoxFit.fill,
+                                  ),
+                          ),
                         ),
                         SizedBox(height: 20),
                         Text(
-                          'User',
+                          userData.name,
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
@@ -140,6 +151,12 @@ class ProfilePage extends ConsumerWidget {
                               context: context,
 
                               onConfirm: () {
+                                log(
+                                  ref
+                                          .read(storeUserIdProvider.notifier)
+                                          .getUserid() ??
+                                      'null',
+                                );
                                 ref
                                     .read(storeUserIdProvider.notifier)
                                     .addUserId('');

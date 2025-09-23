@@ -73,7 +73,6 @@ class ApiAddressServices {
   // Add a new address
 
   Future<void> addNewAddress(AddAddressRequestModel model) async {
-    log(model.toJson().toString());
     try {
       final Response response = await _dio.post(
         AppUrls.addNewAdress,
@@ -99,16 +98,18 @@ class ApiAddressServices {
         AppUrls.editAdress,
         data: model.toJson(),
       );
+
       if (response.statusCode == 200) {
         final data = SuccessModel.fromJson(response.data);
-        showAppSnakBar(data.message, Colorpallets.greenColor);
+        log(data.message);
+        showAppSnakBar('Addresss updated successfuly', Colorpallets.greenColor);
       } else {
         showAppSnakBar('Something went wrong', Colorpallets.redColor);
       }
     } on DioException catch (e) {
       throw Exception(handleDioError(e));
     } catch (e) {
-      throw Exception("Error: ${e.toString()}");
+      // throw Exception("Error: ${e.toString()}");
     }
   }
 
@@ -137,7 +138,6 @@ class ApiAddressServices {
   // get all areas from the district
   Future<List<Area>?> getAllAreas(String district) async {
     try {
-      log(AppUrls.getAreas + district);
       final Response respo = await _dio.get(AppUrls.getAreas + district);
 
       if (respo.statusCode == 200) {

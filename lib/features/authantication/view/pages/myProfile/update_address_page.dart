@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
 import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
 import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
@@ -182,7 +181,6 @@ class _UpdateAdddressBottomSheetState
                         selectedDistrict = val;
                       });
                       if (val != null) {
-                        log(val);
                         fetchAreas(val);
                       }
                     },
@@ -243,7 +241,7 @@ class _UpdateAdddressBottomSheetState
                   await ref
                       .read(apiAddressProvider.notifier)
                       .updateAnAddress(model: model);
-                  log(model.toJson().toString());
+
                   ref.invalidate(getAddressProvider);
                   // await ref.read(apiAddressProvider.notifier).
                   Navigator.pop(context);

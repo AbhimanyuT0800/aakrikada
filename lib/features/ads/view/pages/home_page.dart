@@ -2,6 +2,7 @@ import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/ads/domain/model/categories_model.dart';
 import 'package:aakrikada/features/ads/view/pages/create_ads_page.dart';
 import 'package:aakrikada/features/ads/view/pages/home/all_category_page.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +14,8 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Language provider
     final lang = AppLocalizations.of(context)!;
+
+    final userData = ref.watch(storeUserIdProvider.notifier).getUserDeatils();
 
     return DefaultTabController(
       length: 6,
@@ -61,10 +64,15 @@ class HomePage extends ConsumerWidget {
                                 width: 48,
                                 height: 48,
                                 child: ClipOval(
-                                  child: Image.asset(
-                                    'assets/images/img_avathar.jpg',
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: userData.img.isNotEmpty
+                                      ? Image.network(
+                                          userData.img,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          'assets/images/img_avathar.jpg',
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                             ],

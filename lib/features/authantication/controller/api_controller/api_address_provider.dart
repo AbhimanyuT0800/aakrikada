@@ -80,10 +80,10 @@ class ApiAddress extends _$ApiAddress {
       await ApiAddressServices().updateAddress(model);
     } catch (e) {
       // catch all error throw from api service
-      showAppSnakBar(
-        e.toString().replaceFirst("Exception: ", ""),
-        Colorpallets.redColor,
-      );
+      // showAppSnakBar(
+      //   e.toString().replaceFirst("Exception: ", ""),
+      //   Colorpallets.redColor,
+      // );
     } finally {
       state = false;
     }

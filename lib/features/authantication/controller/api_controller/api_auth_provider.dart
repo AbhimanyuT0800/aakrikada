@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/core/utils/show_app_snakbar.dart';
 import 'package:aakrikada/features/ads/view/pages/my_bottom_navigation_widget.dart';
+import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/domain/model/otp_verified_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/user_upadate_request_model.dart';
 import 'package:aakrikada/features/authantication/services/api_auth_services.dart';
@@ -67,17 +68,23 @@ class ApiAuth extends _$ApiAuth {
 
       // if responce has data navigate to home page section
       if (resp != null) {
-        log(resp.toString());
         if (resp.data.name.isEmpty) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => EditMyProfilePage()),
           );
+        } else {
+          final userData = UserDetails(
+            email: resp.data.email,
+            img: resp.data.userimage,
+            name: resp.data.name,
+          );
+          SharedPrefService.updateUserDetails(userData);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyBottomNavigationWidget()),
+          );
         }
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MyBottomNavigationWidget()),
-        );
 
         // login sucess snak bar after navigate to home page
         showAppSnakBar('Login Successful', Colorpallets.greenColor);
@@ -138,7 +145,6 @@ class ApiAuth extends _$ApiAuth {
 
     required BuildContext context,
   }) async {
-    log('pr-st');
     state = true;
     try {
       final resp = await ApiAuthServices().updateProfile(model);
@@ -146,6 +152,12 @@ class ApiAuth extends _$ApiAuth {
       // if responce has data navigate store id on shares pref
       // and navigate to home paage
       if (resp != null) {
+        final userData = UserDetails(
+          email: resp.data.email,
+          img: resp.data.userimage,
+          name: resp.data.name,
+        );
+        SharedPrefService.updateUserDetails(userData);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => MyBottomNavigationWidget()),
