@@ -155,7 +155,8 @@ class _CreateAdPageState extends ConsumerState<CreateAdPage> {
                 hintText: lang.briefSummary,
                 border: const OutlineInputBorder(),
               ),
-              maxLines: 2,
+              maxLines: 3,
+              maxLength: 80,
             ),
             const SizedBox(height: 16),
 

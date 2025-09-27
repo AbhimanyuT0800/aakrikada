@@ -67,7 +67,7 @@ class OrderDetailsPage extends StatelessWidget {
                   //  item card sctn
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ItemDetailsCard(adsData: adsData),
+                    child: ItemDetailsCard(adsData: adsData, isLeading: false),
                   ),
 
                   const SizedBox(height: 16),

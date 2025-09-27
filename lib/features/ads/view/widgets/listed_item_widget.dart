@@ -20,7 +20,9 @@ class ItemDetailsCard extends StatelessWidget {
     super.key,
     required this.adsData,
     this.isStatusNeeded = true,
+    this.isLeading = true,
   });
+  final bool isLeading;
   final AdData adsData;
   final bool isStatusNeeded;
   final categoryData = [
@@ -35,13 +37,16 @@ class ItemDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
 
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OrderDetailsPage(adsData: adsData),
-        ),
-      ),
+      onTap: isLeading
+          ? () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OrderDetailsPage(adsData: adsData),
+              ),
+            )
+          : null,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -54,22 +59,32 @@ class ItemDetailsCard extends StatelessWidget {
             SizedBox(
               width: 60,
               height: 60,
-              child: Image.network(adsData.image, fit: BoxFit.cover),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(adsData.image, fit: BoxFit.fill),
+              ),
             ),
             SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  categoryData[int.parse(adsData.categories)],
-                  style: TextStyle(fontSize: 16, color: Colorpallets.greyColor),
+                SizedBox(
+                  width: 88,
+                  child: Text(
+                    categoryData[int.parse(adsData.categories)],
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colorpallets.greyColor,
+                    ),
+                  ),
                 ),
                 SizedBox(
-                  width: 198,
+                  height: isLeading ? 30 : null,
+                  width: 180,
                   child: Text(
                     adsData.orderSummary,
-                    overflow: TextOverflow.fade,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Colorpallets.greenColor,
                       fontSize: 18,
@@ -78,7 +93,7 @@ class ItemDetailsCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 198,
+                  width: 180,
                   child: Text(
                     adsData.formattedPickupTime,
                     overflow: TextOverflow.fade,
@@ -96,9 +111,13 @@ class ItemDetailsCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: isStatusNeeded
-                      ? Text(
-                          adsData.status,
-                          style: TextStyle(fontWeight: FontWeight.w700),
+                      ? SizedBox(
+                          width: 68,
+                          child: Text(
+                            adsData.status,
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(fontWeight: FontWeight.w700),
+                          ),
                         )
                       : SizedBox(),
                 ),
@@ -106,10 +125,12 @@ class ItemDetailsCard extends StatelessWidget {
                   onPressed: () {
                     // TODO
                   },
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colorpallets.greenColor,
-                  ),
+                  icon: isLeading
+                      ? Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colorpallets.greenColor,
+                        )
+                      : SizedBox(),
                 ),
               ],
             ),

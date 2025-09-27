@@ -29,6 +29,7 @@ class ApiAdsServices {
   Future<CategoryResponse> getAdCategories() async {
     try {
       Response response = await _dio.get(AppUrls.getCategories);
+
       if (response.statusCode == 200) {
         return CategoryResponse.fromJson(response.data);
       } else {
