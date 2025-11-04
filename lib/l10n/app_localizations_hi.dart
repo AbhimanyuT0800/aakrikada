@@ -178,4 +178,47 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get loginSuccess => 'लॉगिन सफल रहा';
+
+  @override
+  String get town => 'कस्बा';
+
+  @override
+  String get district => 'जिला';
+
+  @override
+  String get area => 'क्षेत्र';
+
+  @override
+  String get saveAddress => 'पता सहेजें';
+
+  @override
+  String get fillAlltheFields => 'सभी फ़ील्ड भरें';
+
+  @override
+  String get errorAddress =>
+      'आपका स्थान प्राप्त करने में त्रुटि .. पुनः प्रयास करें';
+
+  @override
+  String get noAddressFound => 'कोई पता नहीं मिला';
+
+  @override
+  String get chooseProfile => 'प्रोफ़ाइल चुनें';
+
+  @override
+  String get enterEmail => 'अपना ईमेल दर्ज करें';
+
+  @override
+  String get emailRequired => 'ईमेल आवश्यक है';
+
+  @override
+  String get enterValidemail => 'एक मान्य ईमेल दर्ज करें';
+
+  @override
+  String get enterName => 'अपना नाम दर्ज करें';
+
+  @override
+  String get nameRequired => 'नाम आवश्यक है';
+
+  @override
+  String get nameHave3Char => 'नाम में कम से कम 3 अक्षर होने चाहिए';
 }

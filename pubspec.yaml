@@ -15,6 +15,7 @@ dependencies:
     sdk: flutter
   flutter_otp_text_field: ^1.5.1+1
   flutter_riverpod: ^2.6.1
+  geocoding: ^4.0.0
   image_picker: ^1.1.2
   intl: any
   path_provider: ^2.1.5

@@ -1,8 +1,10 @@
 import 'dart:developer';
-import 'package:aakrikada/core/utils/show_app_snakbar.dart';
-import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
 import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/address_request_model.dart';
+import 'package:aakrikada/l10n/app_localizations.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:aakrikada/core/utils/show_app_snakbar.dart';
+import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_areas_model.dart';
 import 'package:aakrikada/features/authantication/domain/model/address_models/get_districts_model.dart';
 import 'package:flutter/material.dart';
@@ -83,8 +85,15 @@ class _AddNewAddressBottomSheetState
     }
   }
 
+  Future<List<Location>?> getLongLat() async {
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // language provider
+    final lang = AppLocalizations.of(context)!;
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
@@ -123,7 +132,7 @@ class _AddNewAddressBottomSheetState
             TextField(
               controller: townController,
               decoration: InputDecoration(
-                labelText: "Town",
+                labelText: lang.town,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -141,7 +150,7 @@ class _AddNewAddressBottomSheetState
                 : DropdownButtonFormField<String>(
                     value: selectedDistrict,
                     decoration: InputDecoration(
-                      labelText: "District",
+                      labelText: lang.district,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -178,7 +187,7 @@ class _AddNewAddressBottomSheetState
                 : DropdownButtonFormField<String>(
                     value: selectedArea,
                     decoration: InputDecoration(
-                      labelText: "Area",
+                      labelText: lang.area,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -203,12 +212,21 @@ class _AddNewAddressBottomSheetState
 
             // Save button
             AuthCommonButton(
-              tittle: "Save Address",
+              tittle: lang.saveAddress,
               onpressed: () async {
                 if (selectedArea != null &&
                     selectedDistrict != null &&
                     townController.text.isNotEmpty &&
                     addressController.text.isNotEmpty) {
+                  List<Location> locations = [];
+                  try {
+                    locations = await locationFromAddress(
+                      "$selectedArea, $selectedDistrict",
+                    );
+                  } catch (e) {
+                    showAppSnakBar(lang.errorAddress, Colorpallets.redColor);
+                  }
+
                   await ref
                       .read(apiAddressProvider.notifier)
                       .createAnAddress(
@@ -220,8 +238,8 @@ class _AddNewAddressBottomSheetState
                           area: selectedArea ?? 'vadakara',
                           town: townController.text,
                           district: selectedDistrict ?? 'calicut',
-                          lat: '12.9141',
-                          lng: '74.85',
+                          lat: locations[0].latitude.toString(),
+                          lng: locations[0].longitude.toString(),
                         ),
                       );
                   ref.invalidate(getAddressProvider);
@@ -229,7 +247,7 @@ class _AddNewAddressBottomSheetState
                   Navigator.pop(context);
                 } else {
                   showAppSnakBar(
-                    'Fill all the fields',
+                    lang.fillAlltheFields,
                     Colorpallets.blackColor,
                   );
                 }

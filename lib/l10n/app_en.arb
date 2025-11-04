@@ -55,6 +55,22 @@
     "confirmLogout": "Are you sure to logout from the app?",
     "no": "NO",
     "yes": "YES",
-    "loginSuccess": "Login Successful"
+    "loginSuccess": "Login Successful",
+    "all":"All",
+    "town": "Town",
+    "district": "District",
+    "area":"Area",
+    "saveAddress": "Save Address",
+    "fillAlltheFields": "Fill all the fields",
+    "errorAddress":"Error getting your location ..Try again",
+    "noAddressFound":"No address found",
+    "chooseProfile":"Choose profile",
+    "enterEmail":"Enter your email",
+    "emailRequired":"Email is required",
+    "enterValidemail":"Enter a valid email",
+    "enterName":"Enter your name",
+    "nameRequired":"Name is required",
+    "nameHave3Char":"Name must be at least 3 characters"
+  
   
 }

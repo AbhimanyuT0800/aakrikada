@@ -441,6 +441,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Login Successful'**
   String get loginSuccess;
+
+  /// No description provided for @town.
+  ///
+  /// In en, this message translates to:
+  /// **'Town'**
+  String get town;
+
+  /// No description provided for @district.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get district;
+
+  /// No description provided for @area.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get area;
+
+  /// No description provided for @saveAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Address'**
+  String get saveAddress;
+
+  /// No description provided for @fillAlltheFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill all the fields'**
+  String get fillAlltheFields;
+
+  /// No description provided for @errorAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Error getting your location ..Try again'**
+  String get errorAddress;
+
+  /// No description provided for @noAddressFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No address found'**
+  String get noAddressFound;
+
+  /// No description provided for @chooseProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose profile'**
+  String get chooseProfile;
+
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get enterEmail;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @enterValidemail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get enterValidemail;
+
+  /// No description provided for @enterName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name'**
+  String get enterName;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get nameRequired;
+
+  /// No description provided for @nameHave3Char.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 3 characters'**
+  String get nameHave3Char;
 }
 
 class _AppLocalizationsDelegate

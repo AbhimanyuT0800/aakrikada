@@ -178,4 +178,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginSuccess => 'Login Successful';
+
+  @override
+  String get town => 'Town';
+
+  @override
+  String get district => 'District';
+
+  @override
+  String get area => 'Area';
+
+  @override
+  String get saveAddress => 'Save Address';
+
+  @override
+  String get fillAlltheFields => 'Fill all the fields';
+
+  @override
+  String get errorAddress => 'Error getting your location ..Try again';
+
+  @override
+  String get noAddressFound => 'No address found';
+
+  @override
+  String get chooseProfile => 'Choose profile';
+
+  @override
+  String get enterEmail => 'Enter your email';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get enterValidemail => 'Enter a valid email';
+
+  @override
+  String get enterName => 'Enter your name';
+
+  @override
+  String get nameRequired => 'Name is required';
+
+  @override
+  String get nameHave3Char => 'Name must be at least 3 characters';
 }

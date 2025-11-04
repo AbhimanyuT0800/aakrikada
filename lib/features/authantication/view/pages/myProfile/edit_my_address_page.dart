@@ -2,7 +2,7 @@ import 'package:aakrikada/core/colorpallets/colorpallets.dart';
 import 'package:aakrikada/features/ads/controller/address_id_provider.dart';
 import 'package:aakrikada/features/authantication/controller/api_controller/api_address_provider.dart';
 import 'package:aakrikada/features/authantication/controller/shared_pref_provider.dart';
-import 'package:aakrikada/features/authantication/view/widgets/add_new_address_page.dart';
+import 'package:aakrikada/features/authantication/view/pages/myProfile/add_new_address_page.dart';
 import 'package:aakrikada/features/authantication/view/widgets/address_card_widget.dart';
 import 'package:aakrikada/features/authantication/view/widgets/auth_common_btn_widget.dart';
 import 'package:aakrikada/l10n/app_localizations.dart';
@@ -80,7 +80,7 @@ class EditMyAddressPage extends ConsumerWidget {
                       child: Column(
                         children: [
                           data!.data.isEmpty
-                              ? Center(child: Text('No address found'))
+                              ? Center(child: Text(lang.noAddressFound))
                               : ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: data.data.length,
@@ -138,7 +138,7 @@ class EditMyAddressPage extends ConsumerWidget {
             Center(child: Text('Pleace try again...')),
         loading: () => Center(
           child: CircularProgressIndicator(color: Colorpallets.primary),
-        ),
+        ), 
       ),
     );
   }

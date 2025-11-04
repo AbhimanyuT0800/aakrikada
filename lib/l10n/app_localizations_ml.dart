@@ -178,4 +178,47 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get loginSuccess => 'ലോഗിൻ വിജയകരമായി നടന്നു';
+
+  @override
+  String get town => 'നഗരം';
+
+  @override
+  String get district => 'ജില്ല';
+
+  @override
+  String get area => 'പ്രദേശം';
+
+  @override
+  String get saveAddress => 'വിലാസം സംരക്ഷിക്കുക';
+
+  @override
+  String get fillAlltheFields => 'എല്ലാ ഫീൽഡുകളും പൂരിപ്പിക്കുക';
+
+  @override
+  String get errorAddress =>
+      'നിങ്ങളുടെ സ്ഥാനം നേടുന്നതിൽ പിശക് ..വീണ്ടും ശ്രമിക്കുക';
+
+  @override
+  String get noAddressFound => 'വിലാസം കണ്ടെത്താനായില്ല';
+
+  @override
+  String get chooseProfile => 'പ്രൊഫൈൽ തിരഞ്ഞെടുക്കുക';
+
+  @override
+  String get enterEmail => 'നിങ്ങളുടെ ഇമെയിൽ നൽകുക';
+
+  @override
+  String get emailRequired => 'ഇമെയിൽ ആവശ്യമാണ്';
+
+  @override
+  String get enterValidemail => 'സാധുവായ ഒരു ഇമെയിൽ നൽകുക';
+
+  @override
+  String get enterName => 'നിങ്ങളുടെ പേര് നൽകുക';
+
+  @override
+  String get nameRequired => 'പേര് ആവശ്യമാണ്';
+
+  @override
+  String get nameHave3Char => 'പേരിന് കുറഞ്ഞത് 3 അക്ഷരങ്ങൾ ഉണ്ടായിരിക്കണം';
 }

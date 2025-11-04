@@ -55,7 +55,23 @@
     "no": "नहीं",
     "yes": "हाँ",
     "loginSuccess": "लॉगिन सफल रहा",
-    "all": "सभी"
+    "all": "सभी",
+    "town": "कस्बा",
+"district": "जिला",
+"area": "क्षेत्र",
+"saveAddress": "पता सहेजें",
+"fillAlltheFields": "सभी फ़ील्ड भरें",
+"errorAddress": "आपका स्थान प्राप्त करने में त्रुटि .. पुनः प्रयास करें",
+"noAddressFound": "कोई पता नहीं मिला",
+"chooseProfile": "प्रोफ़ाइल चुनें",
+"enterEmail": "अपना ईमेल दर्ज करें",
+"emailRequired": "ईमेल आवश्यक है",
+"enterValidemail": "एक मान्य ईमेल दर्ज करें",
+"enterName": "अपना नाम दर्ज करें",
+"nameRequired": "नाम आवश्यक है",
+"nameHave3Char": "नाम में कम से कम 3 अक्षर होने चाहिए"
+
+
 
 
 }
